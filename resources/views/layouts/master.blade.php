@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="bower_components/bootstrap-package/bootstrap-4.3.1-dist/fontawesome-free-5.11.2-web/css/fontawesome.css">
     <link rel="stylesheet" href="bower_components/bootstrap-package/bootstrap-4.3.1-dist/fontawesome-free-5.11.2-web/css/brands.css">
     <link rel="stylesheet" href="bower_components/bootstrap-package/bootstrap-4.3.1-dist/fontawesome-free-5.11.2-web/css/solid.css">
+    <link rel="stylesheet" href="{{ asset('css/slide.css') }}">
     <title>{{ __('header.title') }}</title>
 </head>
 <body>
@@ -18,5 +19,7 @@
     <script src="bower_components/bootstrap-package/jquery.min.js"></script>
     <script src="bower_components/bootstrap-package/popper.min.js"></script>
     <script src="bower_components/bootstrap-package/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/bootstrap-package/bootstrap-input-spinner.js"></script>
+    <script src="{{ asset('js/input-spinner.js') }}"></script>
 </body>
 </html>
