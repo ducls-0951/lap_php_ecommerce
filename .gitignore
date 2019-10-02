@@ -4,6 +4,7 @@
 /storage/*.key
 /database/migrations/*
 /vendor
+.phpintel/*
 .idea/*
 .env
 .env.backup
