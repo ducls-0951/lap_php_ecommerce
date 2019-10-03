@@ -1,0 +1,20 @@
+{
+  "name": "lap_php_ecommerce",
+  "description": "",
+  "main": "",
+  "authors": [
+    "ledwc <le.sy.duc@sun-asterisk.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/ducls-0951/lap_php_ecommerce",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-package": "*"
+  }
+}
