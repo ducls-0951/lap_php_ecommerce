@@ -4,6 +4,7 @@
 /storage/*.key
 /database/migrations/*
 /vendor
+/public/*
 .phpintel/*
 .idea/*
 .env
@@ -14,3 +15,4 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 /public/bower_components
+package.json
