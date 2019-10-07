@@ -9,11 +9,9 @@
 
             <div class="topbar-child2">
                 <span class="topbar-email">
-                    {{--email user--}}
                 </span>
 
                 <div class="topbar-language rs1-select2">
-                    {{--change language--}}
                 </div>
 
                 <a href="#" class="header-wrapicon1 dis-block m-l-30">
@@ -28,30 +26,24 @@
                 <div class="header-wrapicon2 m-r-13">
                     {{-- Cart --}}
                     <img src="bower_components/template-fesha/images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
-                    <span class="header-icons-noti">{{--total product--}}</span>
+                    <span class="header-icons-noti"></span>
 
-                    {{-- Header cart noti --}}
                     <div class="header-cart header-dropdown">
                         <ul class="header-cart-wrapitem">
                             <li class="header-cart-item">
-                                {{--image product--}}
                                 <div class="header-cart-item-img">
-                                    <img src="bower_components/template-fesha/images/item-cart-01.jpg" alt="IMG">
+                                    <img src="bower_components/template-fesha/images/item-cart-01.jpg" alt="{{ __('header.img') }}">
                                 </div>
-                                {{--name, price, quantity product--}}
                                 <div class="header-cart-item-txt">
                                     <a href="#" class="header-cart-item-name">
-                                        {{--name--}}
                                     </a>
                                     <span class="header-cart-item-info">
-                                        {{--quantity, price--}}
                                     </span>
                                 </div>
                             </li>
                         </ul>
 
                         <div class="header-cart-total">
-                            {{--total price--}}
                         </div>
 
                         <div class="header-cart-buttons">
@@ -80,9 +72,9 @@
                 <nav class="menu">
                     <ul class="main_menu">
                         <li>
-                            <a href="#">{{--category product--}}</a>
+                            <a href="#"></a>
                             <ul class="sub_menu">
-                                <li><a href="#">{{--sub category--}}</a></li>
+                                <li><a href="#"></a></li>
                             </ul>
                         </li>
 
@@ -129,31 +121,26 @@
 
                 <div class="header-wrapicon2">
                     <img src="bower_components/template-fesha/images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="{{ __('header.icon') }}">
-                    <span class="header-icons-noti">0</span>
+                    <span class="header-icons-noti"></span>
 
-                    <!-- Header cart noti -->
                     <div class="header-cart header-dropdown">
                         <ul class="header-cart-wrapitem">
                             <li class="header-cart-item">
-                                {{--image product--}}
                                 <div class="header-cart-item-img">
                                     <img src="bower_components/template-fesha/images/item-cart-01.jpg" alt="{{ __('header.img') }}">
                                 </div>
 
                                 <div class="header-cart-item-txt">
                                     <a href="#" class="header-cart-item-name">
-                                        {{--name product--}}
                                     </a>
 
                                     <span class="header-cart-item-info">
-                                        {{--price, quantity--}}
                                     </span>
                                 </div>
                             </li>
                         </ul>
 
                         <div class="header-cart-total">
-                            {{--total price--}}
                         </div>
 
                         <div class="header-cart-buttons">
