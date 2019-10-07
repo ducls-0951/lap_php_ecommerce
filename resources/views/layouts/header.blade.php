@@ -25,14 +25,14 @@
 
                 <div class="header-wrapicon2 m-r-13">
                     {{-- Cart --}}
-                    <img src="bower_components/template-fesha/images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
+                    <img src="{{ asset('bower_components/template-fesha/images/icons/icon-header-02.png') }}" class="header-icon1 js-show-header-dropdown" alt="ICON">
                     <span class="header-icons-noti"></span>
 
                     <div class="header-cart header-dropdown">
                         <ul class="header-cart-wrapitem">
                             <li class="header-cart-item">
                                 <div class="header-cart-item-img">
-                                    <img src="bower_components/template-fesha/images/item-cart-01.jpg" alt="{{ __('header.img') }}">
+                                    <img src="{{ asset('bower_components/template-fesha/images/item-cart-01.jpg') }}" alt="{{ __('header.img') }}">
                                 </div>
                                 <div class="header-cart-item-txt">
                                     <a href="#" class="header-cart-item-name">
@@ -71,13 +71,18 @@
             <div class="wrap_menu">
                 <nav class="menu">
                     <ul class="main_menu">
-                        <li>
-                            <a href="#"></a>
-                            <ul class="sub_menu">
-                                <li><a href="#"></a></li>
-                            </ul>
-                        </li>
-
+                        @foreach ($categories as $category)
+                            @if (!$category->parent_id)
+                                <li>
+                                    <a href="#">{{ $category->name }}</a>
+                                    <ul class="sub_menu">
+                                        @foreach ($category->categories as $category_child)
+                                            <li><a href="#">{{ $category_child->name }}</a></li>
+                                        @endforeach
+                                    </ul>
+                                </li>
+                            @endif
+                        @endforeach
                         <li>
                             <a href="#">{{ __('header.shop') }}</a>
                         </li>
@@ -120,14 +125,14 @@
                 <span class="linedivide2"></span>
 
                 <div class="header-wrapicon2">
-                    <img src="bower_components/template-fesha/images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="{{ __('header.icon') }}">
+                    <img src="{{ asset('bower_components/template-fesha/images/icons/icon-header-02.png') }}" class="header-icon1 js-show-header-dropdown" alt="{{ __('header.icon') }}">
                     <span class="header-icons-noti"></span>
 
                     <div class="header-cart header-dropdown">
                         <ul class="header-cart-wrapitem">
                             <li class="header-cart-item">
                                 <div class="header-cart-item-img">
-                                    <img src="bower_components/template-fesha/images/item-cart-01.jpg" alt="{{ __('header.img') }}">
+                                    <img src="{{ asset('bower_components/template-fesha/images/item-cart-01.jpg') }}" alt="{{ __('header.img') }}">
                                 </div>
 
                                 <div class="header-cart-item-txt">

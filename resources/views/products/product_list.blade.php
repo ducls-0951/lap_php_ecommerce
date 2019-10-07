@@ -18,10 +18,7 @@
         <div class="tab01">
             <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#" role="tab">{{ __('product.bestSeller') }}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#" role="tab">{{ __('product.topRate') }}</a>
+                    <a class="nav-link" data-toggle="tab" href="{{ route('products.topRate') }}" role="tab">{{ __('product.topRate') }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" href="#" role="tab">{{ __('product.new') }}</a>
@@ -33,38 +30,34 @@
             <div class="tab-content p-t-35">
                 <div class="tab-pane fade show active" id="best-seller" role="tabpanel">
                     <div class="row">
-                        <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            <!-- Block2 -->
-                            <div class="block2">
-                                <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
-                                    <img src="" alt="{{ __('header.img') }}"> {{--image product--}}
-
-                                    <div class="block2-overlay trans-0-4">
-                                        <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                            <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                            <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                        </a>
-
-                                        <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            <!-- Button -->
-                                            <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                                {{ __('product.addToCart') }}
-                                            </button>
+                        @foreach ($products as $product)
+                            <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
+                                <!-- Block2 -->
+                                <div class="block2">
+                                    <div class="block2-img wrap-pic-w of-hidden pos-relative">
+                                            <img src="{{ asset('storage/product_images/' . $product[config('top_rate.image')]->image) }}" alt="{{ __('header.img') }}"> {{--image product--}}
+                                        <div class="block2-overlay trans-0-4">
+                                            <div class="block2-btn-addcart w-size1 trans-0-4">
+                                                <!-- Button -->
+                                                <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                                    {{ __('product.addToCart') }}
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="block2-txt p-t-20">
-                                    <a href="#" class="block2-name dis-block s-text3 p-b-5">
-                                        {{--product name--}}
-                                    </a>
+                                    <div class="block2-txt p-t-20">
+                                        <a href="#" class="block2-name dis-block s-text3 p-b-5">
+                                            {{ $product[config('top_rate.info')]->name }}
+                                        </a>
 
-                                    <span class="block2-price m-text6 p-r-5">
-                                        {{--price product--}}
-                                    </span>
+                                        <span class="block2-price m-text6 p-r-5">
+                                            {{ $product[config('top_rate.info')]->price . __('product_list.$') }}
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>

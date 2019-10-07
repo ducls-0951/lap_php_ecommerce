@@ -40,4 +40,9 @@ class Product extends Model
     {
         return $this->hasMany(View::class);
     }
+
+    public function rates()
+    {
+        return $this->hasMany(Rate::class);
+    }
 }

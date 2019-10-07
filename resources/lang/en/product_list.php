@@ -8,4 +8,5 @@ return [
     'add_to_cart' => 'Add to cart',
     'preview_product' => 'Preview Product',
     'price' => 'Price',
+    '$' => '$',
 ];
