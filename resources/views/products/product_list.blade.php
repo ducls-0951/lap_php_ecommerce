@@ -1,81 +1,73 @@
-<div class="container mt-3">
-    <div class="col-lg-12">
-        <div id="carouselExampleIndicators" class="carousel slide my-2" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <li data-target="#carouselExampleIndicators" data-slide-to="{{ config('product.0') }}" class="active"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="{{ config('product.1') }}"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="{{ config('product.2') }}"></li>
-            </ol>
-            <div class="carousel-inner" role="listbox">
-                <div class="carousel-item active">
-                    <img class="d-block slide" src="">
-                </div>
-                <div class="carousel-item">
-                    <img class="d-block slide" src="">
-                </div>
-                <div class="carousel-item">
-                    <img class="d-block slide" src="">
-                </div>
-            </div>
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">{{ __('product_list.previous') }}</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">{{ __('product_list.next') }}</span>
-            </a>
+<section class="slide1">
+    <div class="wrap-slick1">
+        <div class="slick1">
+            <img class="item-slick1 item1-slick1" src="{{ asset('storage/images/slide4.jpg') }}">
+            <img class="item-slick1 item2-slick1" src="{{ asset('storage/images/slide5.jpg') }}">
+            <img class="item-slick1 item3-slick1" src="{{ asset('storage/images/slide6.jpg') }}">
         </div>
     </div>
-    <div class="row">
-        <div class="col-lg-9">
-            <div class="header pt-2">
-                <p class=" h5 text-center text-danger text-uppercase"><i class="fab fa-hotjar pr-2"></i>{{ __('product_list.hot_product') }}<i class="fab fa-hotjar pl-2"></i></p>
-                <hr>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 pb-2">
-                    <div class="card h-100">
-                        <a href="#">
-                            <img class="card-img-top" src="" alt="">
-                        </a>
-                        <div class="card-body">
-                            <h4 class="card-title product_name"></h4>
-                            <h5 class="product_price"></h5>
-                            <p class="card-text product_description">
-                            </p>
-                            <small class="text-muted product_rating"></small>
-                        </div>
-                        <div class="card-footer">
-                            <button type="button" class=" ml-8 btn btn-success"><i class="fas fa-cart-plus mr-2"></i>{{ __('product_list.add_to_cart') }}</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="header pt-2">
-                <p class=" h5 text-center text-info text-uppercase"><i class="fas fa-water pr-2"></i>{{ __('product_list.preview_product') }}<i class="fas fa-water pl-2"></i></p>
-                <hr>
-            </div>
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="card h-100">
-                        <a href="#">
-                            <img class="card-img-top" src="" alt="">
-                        </a>
-                        <div class="card-body">
-                            <h4 class="card-title product_name"></h4>
-                            <h5 class="product_price"></h5>
-                            <p class="card-text product_description">
-                            </p>
-                            <small class="text-muted prodcut_rating"></small>
-                        </div>
-                        <div class="card-footer">
-                            <button type="button" class=" ml-8 btn btn-success"><i class="fas fa-cart-plus mr-2"></i>{{ __('product_list.add_to_cart') }}</button>
+</section>
+
+<section class="bgwhite p-t-45 p-b-58">
+    <div class="container">
+        <div class="sec-title p-b-22">
+            <h3 class="m-text5 t-center">
+                {{ __('product.ourProduct') }}
+            </h3>
+        </div>
+        <div class="tab01">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#" role="tab">{{ __('product.bestSeller') }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#" role="tab">{{ __('product.topRate') }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#" role="tab">{{ __('product.new') }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#" role="tab">{{ __('product.preview') }}</a>
+                </li>
+            </ul>
+            <div class="tab-content p-t-35">
+                <div class="tab-pane fade show active" id="best-seller" role="tabpanel">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
+                            <!-- Block2 -->
+                            <div class="block2">
+                                <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
+                                    <img src="" alt="{{ __('header.img') }}"> {{--image product--}}
+
+                                    <div class="block2-overlay trans-0-4">
+                                        <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+                                            <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+                                            <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+                                        </a>
+
+                                        <div class="block2-btn-addcart w-size1 trans-0-4">
+                                            <!-- Button -->
+                                            <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                                {{ __('product.addToCart') }}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="block2-txt p-t-20">
+                                    <a href="#" class="block2-name dis-block s-text3 p-b-5">
+                                        {{--product name--}}
+                                    </a>
+
+                                    <span class="block2-price m-text6 p-r-5">
+                                        {{--price product--}}
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        @include('layouts.sidebar')
     </div>
-</div>
+</section>
