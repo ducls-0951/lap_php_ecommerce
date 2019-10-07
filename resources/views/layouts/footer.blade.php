@@ -1,7 +1,7 @@
-<footer>
-    <div class="bg-light mt-2">
-        <div class="container">
-            <p class="text-center text-dark">{{ __('footer.copyright') }}</p>
+<footer class="bg6 p-t-45 p-b-43 p-l-45 p-r-45">
+    <div class="t-center p-l-15 p-r-15">
+        <div class="t-center s-text8 p-t-20">
+            {{ __('footer.copyright') }}
         </div>
     </div>
 </footer>

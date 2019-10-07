@@ -15,6 +15,6 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap-package": "*"
+    "template-fesha": "https://github.com/ducls-0951/template-e-commerce.git"
   }
 }
