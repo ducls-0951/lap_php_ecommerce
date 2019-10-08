@@ -3,7 +3,7 @@
     <div class="container-menu-header-v2 p-t-26">
         <div class="topbar2">
             <!-- Logo2 -->
-            <a href="#" class="logo2">
+            <a href="{{ route('products.top_rate') }}" class="logo2">
                 <h3 class="text-uppercase font-weight-bold">{{ __('header.shoesStore') }}</h3>
             </a>
 

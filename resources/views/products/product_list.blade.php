@@ -18,13 +18,13 @@
         <div class="tab01">
             <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="{{ route('products.topRate') }}" role="tab">{{ __('product.topRate') }}</a>
+                    <a class="nav-link" href="{{ route('products.topRate') }}">{{ __('product.topRate') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#" role="tab">{{ __('product.new') }}</a>
+                    <a class="nav-link" href="#" >{{ __('product.new') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#" role="tab">{{ __('product.preview') }}</a>
+                    <a class="nav-link" href="{{ route('products.recently_viewed') }}">{{ __('product.preview') }}</a>
                 </li>
             </ul>
             <div class="tab-content p-t-35">

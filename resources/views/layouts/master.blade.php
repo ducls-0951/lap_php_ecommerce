@@ -21,6 +21,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/template-fesha/vendor/lightbox2/css/lightbox.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/template-fesha/css/util.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/template-fesha/css/main.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/slide.css') }}">
 
     <title>{{ __('header.title') }}</title>
 </head>

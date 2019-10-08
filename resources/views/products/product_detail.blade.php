@@ -26,7 +26,6 @@
                 <span class="m-text17">
                     {{ $product->price }} {{ __('product_list.$') }}
                 </span>
-
                 <p class="s-text8 p-t-10">
                     {{ $product->description }}
                 </p>
