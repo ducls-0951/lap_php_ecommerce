@@ -11,5 +11,11 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/template.js', 'public/js')
-    .styles('resources/css/slide.css', 'public/css/slide.css');
+mix.js([
+        'resources/js/template.js',
+        'resources/js/logout.js'
+        ], 'public/js')
+    .styles([
+        'resources/css/slide.css',
+        'resources/css/form.css'
+        ], 'public/css/silde.css');
