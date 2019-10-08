@@ -2,7 +2,12 @@
     height: 750px;
 }
 
-.wrap-pic-w img {
+.pic-product img {
+    width: 270px;
+    height: 270px;
+}
+
+.pic-product-detail img {
     width: 500px;
     height: 500px;
 }
