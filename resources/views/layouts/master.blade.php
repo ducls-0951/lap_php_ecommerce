@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <link rel="icon" type="image/png" href="{{ asset('bower_components/template-fesha/images/icons/favicon.png"') }}">
+    <link rel="icon" type="image/png" href="{{ asset('bower_components/template-fesha/images/icons/favicon.png') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/template-fesha/vendor/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/template-fesha/fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/template-fesha/fonts/themify/themify-icons.css') }}">
