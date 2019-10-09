@@ -8,4 +8,5 @@ return [
     'add_to_cart' => 'Thêm vào giỏ',
     'preview_product' => 'Sản phẩm đã xem',
     'price' => 'Giá tiền',
+    '$' => '$',
 ];

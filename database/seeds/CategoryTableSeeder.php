@@ -12,26 +12,34 @@ class CategoryTableSeeder extends Seeder
     public function run()
     {
         DB::table('categories')->insert([
-            'name' => 'Giay Nam'
+            'name' => 'Women'
         ]);
         DB::table('categories')->insert([
-            'name' => 'Giay Nu'
+            'name' => 'Men'
         ]);
         DB::table('categories')->insert([
-            'name' => 'Giay Da',
+            'name' => 'Sneakers',
             'parent_id' => 1,
         ]);
         DB::table('categories')->insert([
-            'name' => 'Giay Sneaker',
+            'name' => 'Sneakers',
+            'parent_id' => 2,
+        ]);
+        DB::table('categories')->insert([
+            'name' => 'Oxfords',
+            'parent_id' => 2,
+        ]);
+        DB::table('categories')->insert([
+            'name' => 'Boots',
+            'parent_id' => 2,
+        ]);
+        DB::table('categories')->insert([
+            'name' => 'Boots',
             'parent_id' => 1,
         ]);
         DB::table('categories')->insert([
-            'name' => 'Giay Cao Got',
-            'parent_id' => 2,
-        ]);
-        DB::table('categories')->insert([
-            'name' => 'Giay Sneaker',
-            'parent_id' => 2,
+            'name' => 'Sandals',
+            'parent_id' => 1,
         ]);
     }
 }
