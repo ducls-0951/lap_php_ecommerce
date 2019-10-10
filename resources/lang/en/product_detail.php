@@ -9,4 +9,6 @@ return [
     'description' => 'Description',
     'quantity' => 'Quantity',
     'add_to_cart' => 'Add to cart',
+    'review' => 'Review',
+    'select_size' => 'Select your size',
 ];

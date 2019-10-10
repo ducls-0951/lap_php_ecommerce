@@ -12,3 +12,4 @@
 */
 
 Route::get('/', 'ProductController@topRateProduct')->name('products.topRate');
+Route::get('/products/{product}', 'ProductController@show')->name('products.show');

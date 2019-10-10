@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Mockery\Exception;
 
 class ProductController extends Controller
 {
@@ -30,5 +31,16 @@ class ProductController extends Controller
         }
 
         return view('homepage', ['products' => $arr]);
+    }
+
+    public function show($id)
+    {
+        try {
+            $product = Product::findOrFail($id);
+        } catch (\Exception $e) {
+            return back()->withErrors($e->getMessage());
+        }
+
+        return view('products.product_detail', ['product' => $product]);
     }
 }

@@ -47,7 +47,7 @@
                                     </div>
 
                                     <div class="block2-txt p-t-20">
-                                        <a href="#" class="block2-name dis-block s-text3 p-b-5">
+                                        <a href="{{ route('products.show', ['product' => $product[config('top_rate.info')]->id]) }}" class="block2-name dis-block s-text3 p-b-5">
                                             {{ $product[config('top_rate.info')]->name }}
                                         </a>
 
