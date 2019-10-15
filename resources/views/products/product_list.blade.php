@@ -18,7 +18,7 @@
         <div class="tab01">
             <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('products.topRate') }}">{{ __('product.topRate') }}</a>
+                    <a class="nav-link" href="{{ route('products.top_rate') }}">{{ __('product.topRate') }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" >{{ __('product.new') }}</a>

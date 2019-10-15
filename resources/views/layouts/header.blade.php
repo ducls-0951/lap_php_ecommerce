@@ -77,14 +77,14 @@
                                     <a href="#">{{ $category->name }}</a>
                                     <ul class="sub_menu">
                                         @foreach ($category->categories as $category_child)
-                                            <li><a href="#">{{ $category_child->name }}</a></li>
+                                            <li><a href="{{ route('categories.show', ['category' => $category_child->id]) }}">{{ $category_child->name }}</a></li>
                                         @endforeach
                                     </ul>
                                 </li>
                             @endif
                         @endforeach
                         <li>
-                            <a href="#">{{ __('header.shop') }}</a>
+                            <a href="{{ route('products.index') }}">{{ __('header.shop') }}</a>
                         </li>
 
                         <li>

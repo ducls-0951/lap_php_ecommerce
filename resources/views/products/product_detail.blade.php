@@ -9,7 +9,7 @@
                     <div class="slick3">
                         @foreach ($product->images as $image)
                             <div class="item-slick3" data-thumb="{{ asset('storage/product_images/' . $image->image) }}">
-                                <div class="wrap-pic-w">
+                                <div class="wrap-pic-w pic-product-detail">
                                     <img src="{{ asset('storage/product_images/' . $image->image) }}">
                                 </div>
                             </div>
