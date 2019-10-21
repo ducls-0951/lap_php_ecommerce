@@ -8,18 +8,24 @@
             </a>
 
             <div class="topbar-child2">
-                <span class="topbar-email">
-                </span>
+                <span class="topbar-email"></span>
 
-                <div class="topbar-language rs1-select2">
-                </div>
-
-                <a href="#" class="header-wrapicon1 dis-block m-l-30">
-                    <span class=" h4 lnr lnr-enter"></span>
-                </a>
-                <a href="#" class="header-wrapicon1 dis-block m-l-30">
-                    <span class="h4 lnr lnr-user"></span>
-                </a>
+                <div class="topbar-language rs1-select2"></div>
+                @guest
+                    <a href="{{ route('login') }}" class="header-wrapicon1 dis-block m-l-30">
+                        <span class=" h4 lnr lnr-enter"></span>
+                    </a>
+                    <a href="{{ route('register') }}" class="header-wrapicon1 dis-block m-l-30">
+                        <span class="h4 lnr lnr-user"></span>
+                    </a>
+                @else
+                    <a href="#" class="header-wrapicon1 dis-block m-l-30">
+                        <span class="h4 lnr lnr-user"></span>
+                    </a>
+                    <a href="#" class="header-wrapicon1 dis-block m-l-30 logout">
+                        <span class="h4 lnr lnr-exit"></span>
+                    </a>
+                @endguest
 
                 <span class="linedivide1"></span>
 

@@ -28,8 +28,7 @@
 
                         </ul>
                         <div class="search-product pos-relative bo4 of-hidden">
-                            <input class="s-text7 size6 p-l-23 p-r-50" type="text" name="search-product" placeholder="{{ __('product.search') }}">
-
+                            <input class="s-text7 size6 p-l-23 p-r-50" type="text" name="search_product" placeholder="{{ __('product.search') }}">
                             <button class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4">
                                 <i class="fs-12 fa fa-search" aria-hidden="true"></i>
                             </button>
@@ -87,7 +86,6 @@
                                         <a href="{{ route('products.show', ['product' => $product[config('top_rate.info')]->id]) }}" class="block2-name dis-block s-text3 p-b-5">
                                             {{ $product[config('product.info')]->name }}
                                         </a>
-
                                         <span class="block2-price m-text6 p-r-5">
                                             {{ $product[config('product.info')]->price }} {{__('product.$')}}
                                         </span>

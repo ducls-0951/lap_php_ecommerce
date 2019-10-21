@@ -16,3 +16,5 @@ Route::get('/recently-viewed', 'ProductController@recentlyViewed')->name('produc
 Route::get('/products/{product}', 'ProductController@show')->name('products.show');
 Route::get('/all', 'ProductController@index')->name('products.index');
 Route::get('/categories/{category}', 'CategoryController@show')->name('categories.show');
+
+Route::auth();
