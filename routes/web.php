@@ -18,3 +18,9 @@ Route::get('/all', 'ProductController@index')->name('products.index');
 Route::get('/categories/{category}', 'CategoryController@show')->name('categories.show');
 
 Route::auth();
+
+Route::prefix('cart')->group(function() {
+    Route::get('/index', 'CartController@index')->name('carts.index');
+    Route::post('/add-to-cart', 'CartController@addToCart')->name('carts.add_to_cart');
+    Route::get('/show', 'CartController@Show')->name('carts.show');
+});

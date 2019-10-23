@@ -12,10 +12,8 @@ const mix = require('laravel-mix');
  */
 
 mix.js([
-        'resources/js/template.js',
-        'resources/js/logout.js'
-        ], 'public/js')
-    .styles([
-        'resources/css/slide.css',
-        'resources/css/form.css'
-        ], 'public/css/silde.css');
+    'resources/js/template.js',
+    'resources/js/button-add.js',
+    'resources/js/add-to-cart.js',
+    ], 'public/js')
+    .styles('resources/css/slide.css', 'public/css/slide.css');

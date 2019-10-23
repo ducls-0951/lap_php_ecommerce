@@ -8,35 +8,39 @@
                     <table class="table-shopping-cart">
                         <tr class="table-head">
                             <th class="column-1"></th>
-                            <th class="column-2">{{ __('cart.product') }}</th>
+                            <th class="column-3">{{ __('cart.product') }}</th>
                             <th class="column-3">{{ __('cart.price') }}</th>
-                            <th class="column-4 p-l-70">{{ __('cart.quantity') }}</th>
-                            <th class="column-5">{{ __('cart.total') }}</th>
+                            <th class="column-3 p-l-70">{{ __('cart.quantity') }}</th>
+                            <th class="column-3">{{ __('cart.size') }}</th>
+                            <th class="column-3">{{ __('cart.total') }}</th>
                         </tr>
 
-                        <tr class="table-row">
+                        @foreach ($carts as $cart)
+                            <tr class="table-row">
                             <td class="column-1">
                                 <div class="cart-img-product b-rad-4 o-f-hidden">
-                                    <img src="#" alt="{{ __('cart.img_product') }}">
+                                    <img src="{{ asset('storage/app/product_images/' . $cart['product_id']) }}" alt="{{ __('cart.img_product') }}">
                                 </div>
                             </td>
-                            <td class="column-2"></td>
-                            <td class="column-3"></td>
-                            <td class="column-4">
-                                <div class="flex-w bo5 of-hidden w-size17">
+                            <td class="column-3">{{ $cart['product_id'] }}</td>
+                            <td class="column-3">{{ $cart['price'] }}</td>
+                            <td class="column-3">
+                                <div class="flex-w bo5 of-hidden w-size17 ml-5">
                                     <button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
                                         <i class="fs-12 fa fa-minus" aria-hidden="true"></i>
                                     </button>
 
-                                    <input class="size8 m-text18 t-center num-product" type="number" name="num-product1" value="{{ config('product.quantity_min') }}">
+                                    <input class="size8 m-text18 t-center num-product" type="number" name="num-product1" value="{{ $cart['quantity'] }}">
 
                                     <button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
                                         <i class="fs-12 fa fa-plus" aria-hidden="true"></i>
                                     </button>
                                 </div>
                             </td>
-                            <td class="column-5"></td>
+                            <td class="column-3">{{ $cart['size'] }}</td>
+                            <td class="column-3">{{ $cart['sub_total'] }}</td>
                         </tr>
+                        @endforeach
                     </table>
                 </div>
             </div>
