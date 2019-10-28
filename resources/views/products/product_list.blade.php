@@ -35,7 +35,7 @@
                                 <!-- Block2 -->
                                 <div class="block2">
                                     <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                                            <img src="{{ asset('storage/product_images/' . $product[config('top_rate.image')]->image) }}" alt="{{ __('header.img') }}"> {{--image product--}}
+                                            <img src="{{ asset('storage/product_images/' . $product[config('top_rate.image')]->image) }}" alt="{{ __('header.img') }}">
                                         <div class="block2-overlay trans-0-4">
                                             <div class="block2-btn-addcart w-size1 trans-0-4">
                                                 <!-- Button -->

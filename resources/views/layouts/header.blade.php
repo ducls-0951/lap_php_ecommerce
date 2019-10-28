@@ -36,21 +36,10 @@
 
                     <div class="header-cart header-dropdown">
                         <ul class="header-cart-wrapitem">
-                            <li class="header-cart-item">
-                                <div class="header-cart-item-img">
-                                    <img src="{{ asset('bower_components/template-fesha/images/item-cart-01.jpg') }}" alt="{{ __('header.img') }}">
-                                </div>
-                                <div class="header-cart-item-txt">
-                                    <a href="#" class="header-cart-item-name">
-                                    </a>
-                                    <span class="header-cart-item-info">
-                                    </span>
-                                </div>
-                            </li>
+
                         </ul>
 
-                        <div class="header-cart-total">
-                        </div>
+                        <div class="header-cart-total"></div>
 
                         <div class="header-cart-buttons">
                             <div class="header-cart-wrapbtn">
@@ -94,7 +83,7 @@
                         </li>
 
                         <li>
-                            <a href="#">{{ __('header.cart') }}</a>
+                            <a href="{{ route('carts.index') }}">{{ __('header.cart') }}</a>
                         </li>
 
                         <li>
