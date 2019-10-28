@@ -32,7 +32,7 @@
                 <div class="header-wrapicon2 m-r-13">
                     {{-- Cart --}}
                     <img src="{{ asset('bower_components/template-fesha/images/icons/icon-header-02.png') }}" class="header-icon1 js-show-header-dropdown" alt="ICON">
-                    <span class="header-icons-noti"></span>
+                    <span class="header-icons-noti">{{ $count }}</span>
 
                     <div class="header-cart header-dropdown">
                         <ul class="header-cart-wrapitem">
@@ -44,7 +44,7 @@
                         <div class="header-cart-buttons">
                             <div class="header-cart-wrapbtn">
                                 <!-- Button -->
-                                <a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                                <a href="{{ route('carts.index') }}" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
                                     {{ __('header.viewCart') }}
                                 </a>
                             </div>

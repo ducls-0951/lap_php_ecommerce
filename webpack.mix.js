@@ -16,4 +16,7 @@ mix.js([
     'resources/js/button-add.js',
     'resources/js/add-to-cart.js',
     ], 'public/js')
-    .styles('resources/css/slide.css', 'public/css/slide.css');
+    .styles([
+    'resources/css/slide.css',
+    'resources/css/cart.css',
+    ], 'public/css/slide.css');

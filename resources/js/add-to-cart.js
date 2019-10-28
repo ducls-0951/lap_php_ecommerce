@@ -1,11 +1,11 @@
-$(document).ready(function() {
+$(document).ready(function () {
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
 
-    $('.add_to_cart').click(function () {
+    $('.add-to-cart').click(function (event) {
         event.preventDefault();
         let product_id = $('.product_id').val();
         let num_product = $('.num-product').val();
@@ -14,40 +14,74 @@ $(document).ready(function() {
 
         $.ajax({
             type: 'POST',
-            url: '/cart/add-to-cart',
+            url: '/carts/add-to-cart',
             data: {'product_id' : product_id, 'num_product' : num_product, 'size' : size},
-            success: function(flag) {
-                swal(product_name, "is added to cart !", "success");
+            success: function(data) {
+                if (data.flag) {
+                    swal(product_name, "is added to cart !", "success");
+                }
+
+                $('.header-icons-noti').text(data.count);
+            },
+            error: function() {
+                swal("Opps...", "Something went wrong !", "error");
             }
         })
     });
 
-    $('.js-show-header-dropdown').one('click', function () {
+    $('.js-show-header-dropdown').click(function (event) {
         event.preventDefault();
 
         $.ajax({
-            xhrFields: { withCredentials: true },
             type: 'GET',
-            url : '/cart/show',
-            data: $.get(window.location.origin),
-            success: function (result) {
-                $.each(result, function(key, value) {
-                    let url = window.location.origin + '/storage/product_images/' + value.product_image;
-                    let html = `
-                        <li class="header-cart-item">
+            url : '/carts/show',
+            success: function (data) {
+                let html = "";
+                $.each(data.products, function(key, value) {
+                    let url_image = window.location.origin + '/storage/product_images/' + value.product_image;
+                    let url_product = window.location.origin + '/products/' + value.product_id;
+                    html += `
+                        <li id="` + value.product_id + `" class="header-cart-item" data-id="` + value.product_id + `">
                             <div class="header-cart-item-img">
-                                <img src="` + url + `" alt="">
+                                <img src="` + url_image + `" alt="IMG" class="product_image">
                             </div>
                             <div class="header-cart-item-txt">
-                                <a href="#" class="header-cart-item-name">` + value.product_name +
+                                <button class="text-danger delete-product-cart del-product" data-id="` + value.product_id + `">
+                                    Delete
+                                </button>
+                                <a href="` + url_product + `" class="header-cart-item-name">` + value.product_name +
                                 `</a>
                                 <span class="header-cart-item-info">` + value.quantity + ' * ' + value.price + '$' +
                                 `</span>
                             </div>
                         </li>
                     `;
-                    $('.header-cart-wrapitem').append(html);
                 });
+                $('.header-cart-wrapitem').html(html);
+            }
+        })
+    });
+
+    $('.header-cart-wrapitem').on("click", "button.del-product", function () {
+        let product_id = $(this).attr('data-id');
+
+        $.ajax({
+            type: 'DELETE',
+            url: '/carts/deleteCart',
+            data: {'product_id' : product_id},
+            success: function(data) {
+                if (data.flag) {
+                    $('#' + product_id).remove();
+                    data.count -= 1;
+                    $('.header-icons-noti').text(data.count);
+                    swal('Delete product', 'is successful !', 'success');
+                } else {
+                    swal('Ops...', 'something wrong !', 'error');
+                }
+
+            },
+            error: function() {
+                swal('Ops...', 'something wrong !', 'error');
             }
         })
     })

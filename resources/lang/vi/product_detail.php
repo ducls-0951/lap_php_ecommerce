@@ -9,4 +9,5 @@ return [
     'description' => 'Miêu tả',
     'quantity' => 'Số lượng',
     'add_to_cart' => 'Thêm vào giỏ',
+    'img_product' => 'IMG-PRODUCT',
 ];
