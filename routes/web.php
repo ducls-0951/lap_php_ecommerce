@@ -19,8 +19,10 @@ Route::get('/categories/{category}', 'CategoryController@show')->name('categorie
 
 Route::auth();
 
-Route::prefix('cart')->group(function() {
+Route::prefix('carts')->group(function() {
     Route::get('/index', 'CartController@index')->name('carts.index');
     Route::post('/add-to-cart', 'CartController@addToCart')->name('carts.add_to_cart');
-    Route::get('/show', 'CartController@Show')->name('carts.show');
+    Route::get('/show', 'CartController@show')->name('carts.show');
+    Route::post('/updateCart', 'CartController@updateCart')->name('carts.updateCart');
+    Route::delete('/deleteCart', 'CartController@deleteCart')->name('carts.deleteCart');
 });
