@@ -17,9 +17,17 @@ Route::get('/products/{product}', 'ProductController@show')->name('products.show
 Route::get('/all', 'ProductController@index')->name('products.index');
 Route::get('/categories/{category}', 'CategoryController@show')->name('categories.show');
 
+Route::prefix('admin')->group(function () {
+    Route::get('index_product', 'AdminController@index_product')->name('admin.index_product');
+    Route::get('index_user', 'AdminController@index_user')->name('admin.index_user');
+    Route::get('index_order', 'AdminController@index_order')->name('admin.index_order');
+    Route::get('index_category', 'AdminController@index_category')->name('admin.index_category');
+    Route::get('products/create', 'AdminController@create_product')->name('admin.create_product');
+});
+
 Route::auth();
 
-Route::prefix('carts')->group(function() {
+Route::prefix('carts')->group(function () {
     Route::get('/index', 'CartController@index')->name('carts.index');
     Route::post('/add-to-cart', 'CartController@addToCart')->name('carts.add_to_cart');
     Route::get('/show', 'CartController@show')->name('carts.show');
