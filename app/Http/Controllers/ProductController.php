@@ -44,7 +44,7 @@ class ProductController extends Controller
     {
         $product = $this->productRepository->find($id);
 
-        $this->preview = unserialize(Cookie::get('preview'));
+        $this->preview[] = unserialize(Cookie::get('preview'));
 
         if ($product) {
             if ($this->preview) {
@@ -67,7 +67,7 @@ class ProductController extends Controller
     {
         $arr = [];
         $products = $this->productRepository->getWith(['rates', 'images']);
-        $this->preview = unserialize(Cookie::get('preview'));
+        $this->preview[] = unserialize(Cookie::get('preview'));
         foreach ($products as $product) {
             if (in_array($product->id, $this->preview)) {
                 $image = $product->images->last();
