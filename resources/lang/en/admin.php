@@ -30,6 +30,8 @@ return [
     'address' => 'Address',
     'telephone' => 'Telephone',
     'status' => 'Status',
-    'category' => 'Category',
     'category_parent' => 'Category Parent',
+    'product_name' => 'Product Name',
+    'description' => 'Description',
+    'submit' => 'Submit',
 ];
