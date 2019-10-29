@@ -26,12 +26,16 @@ class CartController extends Controller
     public function index(Request $request)
     {
         $this->carts = unserialize($request->cookie('cart'));
+        if ($this->carts) {
+            foreach ($this->carts as $cart) {
+                $this->total_price += $cart['sub_total'];
+            }
 
-        foreach ($this->carts as $cart) {
-            $this->total_price += $cart['sub_total'];
+            return view('carts.cart_list', ['carts' => $this->carts, 'total_price' => $this->total_price]);
+        } else {
+            return view('carts.cart_list', ['carts' => '', 'total_price' => 0]);
         }
 
-        return view('carts.cart_list', ['carts' => $this->carts, 'total_price' => $this->total_price]);
     }
 
     public function addToCart(Request $request)

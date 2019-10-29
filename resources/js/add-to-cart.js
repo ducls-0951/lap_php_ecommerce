@@ -84,5 +84,29 @@ $(document).ready(function () {
                 swal('Ops...', 'something wrong !', 'error');
             }
         })
-    })
+    });
+
+    $('.btn-del-product').click(function (event) {
+        event.preventDefault();
+        let product_id = $(this).val();
+
+        $.ajax({
+            type: 'DELETE',
+            url: '/carts/deleteCart',
+            data: {product_id : product_id},
+            success: function(data) {
+                if(data.flag) {
+                    $('#' + product_id).remove();
+                    data.count -= 1;
+                    $('.header-icons-noti').text(data.count);
+                    swal('Delete product', 'is successful !', 'success');
+                } else {
+                    swal('Ops...', 'something wrong !', 'error');
+                }
+            },
+            error: function() {
+                swal('Ops...', 'something wrong !', 'error');
+            }
+        })
+    });
 });
