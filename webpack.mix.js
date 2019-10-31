@@ -19,4 +19,5 @@ mix.js([
     .styles([
     'resources/css/slide.css',
     'resources/css/cart.css',
+    'resources/css/form.css'
     ], 'public/css/slide.css');
