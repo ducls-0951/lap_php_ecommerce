@@ -34,3 +34,7 @@ Route::prefix('carts')->group(function () {
     Route::post('/updateCart', 'CartController@updateCart')->name('carts.updateCart');
     Route::delete('/deleteCart', 'CartController@deleteCart')->name('carts.deleteCart');
 });
+
+Route::prefix('orders')->group(function () {
+    Route::post('/checkout', 'OrderController@store')->name('orders.store')->middleware('auth');
+});

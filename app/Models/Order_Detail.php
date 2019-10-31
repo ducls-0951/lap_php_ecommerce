@@ -22,4 +22,6 @@ class Order_Detail extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    protected $table = 'order_detail';
 }
