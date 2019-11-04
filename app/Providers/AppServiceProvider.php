@@ -35,7 +35,11 @@ class AppServiceProvider extends ServiceProvider
 
         try {
             $this->carts = (Crypt::decrypt(Cookie::get('cart'), true));
-            $this->count = count($this->carts);
+            if ($this->carts) {
+                $this->count = count($this->carts);
+            } else {
+                $this->count = 0;
+            }
         } catch (DecryptException $e) {
 
         }

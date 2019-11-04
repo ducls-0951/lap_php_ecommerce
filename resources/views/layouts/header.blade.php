@@ -48,13 +48,6 @@
                                     {{ __('header.viewCart') }}
                                 </a>
                             </div>
-
-                            <div class="header-cart-wrapbtn">
-                                <!-- Button -->
-                                <a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                                    {{ __('header.checkOut') }}
-                                </a>
-                            </div>
                         </div>
                     </div>
                 </div>

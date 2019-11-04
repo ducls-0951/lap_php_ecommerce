@@ -13,6 +13,7 @@ const mix = require('laravel-mix');
 
 mix.js([
     'resources/js/template.js',
+    'resources/js/logout.js',
     'resources/js/button-add.js',
     'resources/js/add-to-cart.js',
     ], 'public/js')

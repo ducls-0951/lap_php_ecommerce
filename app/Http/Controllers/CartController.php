@@ -35,7 +35,6 @@ class CartController extends Controller
         } else {
             return view('carts.cart_list', ['carts' => '', 'total_price' => 0]);
         }
-
     }
 
     public function addToCart(Request $request)
