@@ -66,7 +66,7 @@ class User extends Authenticatable
         return $this->hasMany(Activity::class);
     }
 
-    public function suggest()
+    public function suggests()
     {
         return $this->hasMany(Suggest::class);
     }
