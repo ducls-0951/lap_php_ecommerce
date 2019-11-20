@@ -11,11 +11,6 @@ class AdminController extends Controller
         return view('admin.master');
     }
 
-    public function index_product()
-    {
-        return view('admin.product_show');
-    }
-
     public function index_user()
     {
         return view('admin.user_show');

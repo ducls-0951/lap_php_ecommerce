@@ -16,11 +16,13 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Category;
+use App\Models\Size;
 
 class AppServiceProvider extends ServiceProvider
 {
     private $count;
     private $carts;
+    private $sizes;
     private $categories;
     /**
      * Register any application services.
@@ -70,7 +72,10 @@ class AppServiceProvider extends ServiceProvider
 
         }
 
+        $this->sizes = Size::all();
+
         View::share('categories', $this->categories);
+        View::share('sizes', $this->sizes);
         View::share('count', $this->count);
     }
 }
