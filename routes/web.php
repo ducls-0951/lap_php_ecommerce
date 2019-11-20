@@ -23,6 +23,8 @@ Route::prefix('admin')->group(function() {
     Route::get('products/create', 'Admin\ProductController@create')->name('admin.create_product');
     Route::post('products/store', 'Admin\ProductController@store')->name('admin.store_product');
     Route::delete('products/delete', 'Admin\ProductController@delete')->name('admin.delete_product');
+    Route::put('products/{product}', 'Admin\ProductController@update')->name('admin.update_product');
+    Route::get('products/{product}/edit', 'Admin\ProductController@edit')->name('admin.edit_product');
     Route::get('orders/index', 'Admin\OrderController@index')->name('admin.index_order');
     Route::put('orders/{order}', 'Admin\OrderController@update')->name('admin.update_order');
     Route::delete('orders/{order}', 'Admin\OrderController@destroy')->name('admin.cancel_order');
@@ -30,7 +32,7 @@ Route::prefix('admin')->group(function() {
     Route::get('index_category', 'AdminController@index_category')->name('admin.index_category');
 });
 
-Route::prefix('cart')->group(function() {
+Route::prefix('carts')->group(function() {
     Route::get('/index', 'CartController@index')->name('carts.index');
     Route::post('/add-to-cart', 'CartController@addToCart')->name('carts.add_to_cart');
     Route::get('/show', 'CartController@show')->name('carts.show');

@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'upload_image' => 'app/public/images',
+    'upload_image' => 'app/public/product_images',
 ];
