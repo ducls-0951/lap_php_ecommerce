@@ -19,3 +19,4 @@ package.json
 /public/css/
 /public/js/
 webpack.mix.js
+public/mix-manifest.json
