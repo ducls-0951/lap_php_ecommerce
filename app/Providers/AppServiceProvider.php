@@ -4,23 +4,30 @@ namespace App\Providers;
 
 use App\Repositories\Category\CategoryRepository;
 use App\Repositories\Category\CategoryRepositoryInterface;
+
+use App\Repositories\Image\ImageRepository;
+use App\Repositories\Image\ImageRepositoryInterface;
+
 use App\Repositories\Order\OrderRepository;
 use App\Repositories\Order\OrderRepositoryInterface;
 use App\Repositories\OrderDetail\OrderDetailRepository;
 use App\Repositories\OrderDetail\OrderDetailRepositoryInterface;
 use App\Repositories\Product\ProductRepository;
 use App\Repositories\Product\ProductRepositoryInterface;
+
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Category;
+use App\Models\Size;
 
 class AppServiceProvider extends ServiceProvider
 {
     private $count;
     private $carts;
+    private $sizes;
     private $categories;
     /**
      * Register any application services.
@@ -45,8 +52,8 @@ class AppServiceProvider extends ServiceProvider
         );
 
         $this->app->singleton(
-            CategoryRepositoryInterface::class,
-            CategoryRepository::class
+            ImageRepositoryInterface::class,
+            ImageRepository::class
         );
     }
 
@@ -70,7 +77,10 @@ class AppServiceProvider extends ServiceProvider
 
         }
 
+        $this->sizes = Size::all();
+
         View::share('categories', $this->categories);
+        View::share('sizes', $this->sizes);
         View::share('count', $this->count);
     }
 }

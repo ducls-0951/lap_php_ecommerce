@@ -47,7 +47,8 @@ class CartController extends Controller
 
         try {
             $this->product = Product::with('images')->findOrFail($this->data['product_id']);
-            $this->product_image = $this->product->images->first();
+            $this->product_image = $this->product->images
+                ->first();
             $this->product_detail = [
                 'product_id' => $this->data['product_id'],
                 'product_name' => $this->product->name,

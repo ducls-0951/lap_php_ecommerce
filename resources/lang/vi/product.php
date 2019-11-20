@@ -24,4 +24,6 @@ return [
     'short_price_high' => 'Price: high to low',
     '$' => '$',
     'search' => 'Tìm kiếm sản phẩm...',
+    'product_fail' => 'Create product fail!',
+    'product_success' => 'Create product successfully!',
 ];

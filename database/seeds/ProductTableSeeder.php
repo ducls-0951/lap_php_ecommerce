@@ -17,7 +17,7 @@ class ProductTableSeeder extends Seeder
             'price' => 50,
             'price_sale' => 30,
             'category_id' => 5,
-            'description' => 'This is a beautifull shoes',
+            'description' => 'This is a beautiful shoes',
         ]);
         DB::table('products')->insert([
             'name' => 'Oxford brown',
@@ -25,7 +25,7 @@ class ProductTableSeeder extends Seeder
             'price' => 40,
             'price_sale' => 35,
             'category_id' => 5,
-            'description' => 'This is a beautifull shoes',
+            'description' => 'This is a beautiful shoes',
         ]);
         DB::table('products')->insert([
             'name' => 'Oxford white',
@@ -33,7 +33,7 @@ class ProductTableSeeder extends Seeder
             'price' => 40,
             'price_sale' => 35,
             'category_id' => 5,
-            'description' => 'This is a beautifull shoes',
+            'description' => 'This is a beautiful shoes',
         ]);
         DB::table('products')->insert([
             'name' => 'Boots black',
@@ -41,7 +41,7 @@ class ProductTableSeeder extends Seeder
             'price' => 60,
             'price_sale' => 55,
             'category_id' => 6,
-            'description' => 'This is a beautifull shoes',
+            'description' => 'This is a beautiful shoes',
         ]);
         DB::table('products')->insert([
             'name' => 'Boots brown',
@@ -49,7 +49,7 @@ class ProductTableSeeder extends Seeder
             'price' => 50,
             'price_sale' => 40,
             'category_id' => 6,
-            'description' => 'This is a beautifull shoes',
+            'description' => 'This is a beautiful shoes',
         ]);
         DB::table('products')->insert([
             'name' => 'Boots brown',
@@ -57,7 +57,7 @@ class ProductTableSeeder extends Seeder
             'price' => 50,
             'price_sale' => 45,
             'category_id' => 6,
-            'description' => 'This is a beautifull shoes',
+            'description' => 'This is a beautiful shoes',
         ]);
         DB::table('products')->insert([
             'name' => 'Sneaker black',
@@ -65,7 +65,7 @@ class ProductTableSeeder extends Seeder
             'price' => 50,
             'price_sale' => 48,
             'category_id' => 4,
-            'description' => 'This is a beautifull shoes',
+            'description' => 'This is a beautiful shoes',
         ]);
         DB::table('products')->insert([
             'name' => 'Sneaker red',
@@ -73,7 +73,7 @@ class ProductTableSeeder extends Seeder
             'price' => 50,
             'price_sale' => 48,
             'category_id' => 4,
-            'description' => 'This is a beautifull shoes',
+            'description' => 'This is a beautiful shoes',
         ]);
         DB::table('products')->insert([
             'name' => 'Sneaker white',
@@ -81,7 +81,7 @@ class ProductTableSeeder extends Seeder
             'price' => 50,
             'price_sale' => 49,
             'category_id' => 4,
-            'description' => 'This is a beautifull shoes',
+            'description' => 'This is a beautiful shoes',
         ]);
         DB::table('products')->insert([
             'name' => 'Sandal black',
@@ -97,7 +97,7 @@ class ProductTableSeeder extends Seeder
             'price' => 50,
             'price_sale' => 30,
             'category_id' => 8,
-            'description' => 'This is a beautifull shoes',
+            'description' => 'This is a beautiful shoes',
         ]);
         DB::table('products')->insert([
             'name' => 'Sandal brown',
@@ -105,7 +105,7 @@ class ProductTableSeeder extends Seeder
             'price' => 50,
             'price_sale' => 30,
             'category_id' => 8,
-            'description' => 'This is a beautifull shoes',
+            'description' => 'This is a beautiful shoes',
         ]);
         DB::table('products')->insert([
             'name' => 'Boots white',
@@ -113,7 +113,7 @@ class ProductTableSeeder extends Seeder
             'price' => 50,
             'price_sale' => 30,
             'category_id' => 7,
-            'description' => 'This is a beautifull shoes',
+            'description' => 'This is a beautiful shoes',
         ]);
     }
 }
