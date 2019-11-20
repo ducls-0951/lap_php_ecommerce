@@ -9,7 +9,9 @@
                         @csrf
                         <div class="form-group row justify-content-center">
                             <div class="col-sm-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="{{ __('auth.email') }}">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
+                                       name="email" value="{{ old('email') }}" required autocomplete="email"
+                                       placeholder="{{ __('auth.email') }}">
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -19,7 +21,9 @@
                         </div>
                         <div class="form-group row justify-content-center">
                             <div class="col-sm-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="{{ __('auth.password') }}">
+                                <input id="password" type="password"
+                                       class="form-control @error('password') is-invalid @enderror" name="password"
+                                       required autocomplete="current-password" placeholder="{{ __('auth.password') }}">
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -29,7 +33,8 @@
                         </div>
                         <div class="form-group row justify-content-center">
                             <div class="col-sm-6">
-                                <button type="submit" class="btn btn-success btn-block">{{ __('auth.login') }}</button>
+                                <button type="submit"
+                                        class="btn btn-success btn-block btn-login">{{ __('auth.login') }}</button>
                             </div>
                         </div>
                         <div class="form-group row justify-content-center">
