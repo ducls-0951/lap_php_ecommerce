@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreOrderPost;
 use App\Models\Order_Detail;
+use App\Repositories\Order\OrderRepository;
+use App\Repositories\Order\OrderRepositoryInterface;
+use App\Repositories\OrderDetail\OrderDetailRepository;
+use App\Repositories\OrderDetail\OrderDetailRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Models\Order;
 
@@ -12,6 +16,14 @@ class OrderController extends Controller
     private $total_price;
     private $total_quantity;
     private $cookie;
+    private $orderRepository;
+    private $orderDetailRepository;
+
+    public function __construct(OrderRepositoryInterface $orderRepository, OrderDetailRepositoryInterface $orderDetailRepository)
+    {
+        $this->orderRepository = $orderRepository;
+        $this->orderDetailRepository = $orderDetailRepository;
+    }
 
     public function store(StoreOrderPost $request)
     {
@@ -39,7 +51,7 @@ class OrderController extends Controller
                     'status' => config('order.processing'),
                 ];
 
-                $order = Order::create($data_save);
+                $order = $this->orderRepository->create($data_save);
 
                 foreach ($carts as $cart) {
                     $data_save = [
@@ -49,14 +61,14 @@ class OrderController extends Controller
                         'order_id' => $order->id,
                     ];
 
-                    $order_detail = Order_Detail::create($data_save);
+                    $order_detail = $this->orderDetailRepository->create($data_save);
                     $this->cookie = cookie('cart', '', config('time.expire'));
                 }
             }
 
-            return redirect()->back()->with('status', __('config.order_successfully'))->withCookie($this->cookie);
+            return redirect()->back()->with('status', __('order.order_successfully'))->withCookie($this->cookie);
         } catch (\Exception $e) {
-            return redirect()->back()->with('msg', __('config.order_fail'))->withCookies($this->cookie);
+            return redirect()->back()->with('msg', __('order.order_fail'))->withCookies($this->cookie);
         }
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\Product\ProductRepositoryInterface;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
@@ -10,73 +11,70 @@ use Exception;
 
 class ProductController extends Controller
 {
-    private $products;
-    protected $arr;
-    private $sum;
-    private $count;
-    private $image;
-    private $rate_avg;
-    private $product;
+    protected $productRepository;
+    private $preview = [];
+
+    public function __construct(ProductRepositoryInterface $productRepository)
+    {
+        $this->productRepository = $productRepository;
+    }
 
     public function index()
     {
-        $this->arr = [];
-        $this->products = Product::with('images')->get();
+        $arr = [];
+        $products = $this->productRepository->getWith(['images']);
 
-        foreach ($this->products as $product) {
-            $this->image = $product->images()->first();
-            array_push($this->arr, [$product, $this->image]);
+        foreach ($products as $product) {
+            $image = $product->images->last();
+            array_push($arr, [$product, $image]);
         }
 
-        return view('products.product', ['products' => $this->arr]);
+        return view('products.product', ['products' => $arr]);
     }
 
     public function topRateProduct()
     {
-        $this->arr = [];
-        $this->products = Product::with(['rates', 'images'])->get();
+        $data = $this->productRepository->getWith(['rates', 'images']);
+        $arr = $this->productRepository->topRateProduct($data);
 
-        foreach ($this->products as $product) {
-            $this->sum = $product->rates->sum('rating');
-            $this->count = $product->rates->count('rating');
-            $this->image = $product->images->first();
-
-            if ($this->count > 0 && ($this->sum / $this->count) >= config('top_rate.rate_avg') )  {
-                array_push($this->arr, [$product, $this->image]);
-            }
-        }
-
-        return view('homepage', ['products' => $this->arr]);
+        return view('homepage', ['products' => $arr]);
     }
 
     public function show($id)
     {
-        try {
-            $this->product = Product::findOrFail($id);
+        $product = $this->productRepository->find($id);
 
-            if (session()->get('products.recently_viewed') != $this->product->id) {
-                session()->push('products.recently_viewed', $this->product->id);
+        $this->preview = unserialize(Cookie::get('preview'));
+
+        if ($product) {
+            if ($this->preview) {
+                if (!in_array($product->id, $this->preview)) {
+                    array_push($this->preview, $product->id);
+                }
+            } else {
+                $this->preview += $product->id;
             }
-        } catch (Exception $e) {
-            return back()->withErrors($e->getMessage());
+
+            return response()
+                ->view('products.product_detail', ['product' => $product])
+                ->withCookie(cookie('preview', serialize($this->preview), 360));
         }
 
-        return view('products.product_detail', ['product' => $this->product]);
+        return back();
     }
 
     public function recentlyViewed()
     {
-        $this->arr = [];
-
-        if(session()->get('products.recently_viewed')) {
-            $this->products = Product::with('rates', 'images')->whereIn('id', session()->get('products.recently_viewed'))->get();
-
-            foreach ($this->products as $this->product) {
-                $this->image = $this->product->images->first();
-                array_push($this->arr, [$this->product, $this->image]);
+        $arr = [];
+        $products = $this->productRepository->getWith(['rates', 'images']);
+        $this->preview = unserialize(Cookie::get('preview'));
+        foreach ($products as $product) {
+            if (in_array($product->id, $this->preview)) {
+                $image = $product->images->last();
+                array_push($arr, [$product, $image]);
             }
         }
 
-        return view('homepage', ['products' => $this->arr]);
+        return view('homepage', ['products' => $arr]);
     }
 }
