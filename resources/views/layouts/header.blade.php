@@ -19,7 +19,7 @@
                         <span class="h4 lnr lnr-user"></span>
                     </a>
                 @else
-                    <a href="#" class="header-wrapicon1 dis-block m-l-30">
+                    <a href="{{ route('users.show', ['user' => auth()->id()]) }}" class="header-wrapicon1 dis-block m-l-30">
                         <span class="h4 lnr lnr-user"></span>
                     </a>
                     <a href="#" class="header-wrapicon1 dis-block m-l-30 logout">
