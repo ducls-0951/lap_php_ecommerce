@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\Category\CategoryRepository;
+use App\Repositories\Category\CategoryRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use Exception;
@@ -13,14 +15,19 @@ class CategoryController extends Controller
     private $product;
     private $image;
     private $arr;
+    private $categoryRepository;
+
+    public function __construct(CategoryRepositoryInterface $categoryRepository)
+    {
+        return $this->categoryRepository = $categoryRepository;
+    }
 
     public function show($id)
     {
         $this->arr = [];
+        $this->category = $this->categoryRepository->getWith('categories.products')->find($id);
 
-        try {
-            $this->category = Category::with(['categories.products'])->findOrFail($id);
-
+        if ($this->category) {
             if (!$this->category->parent_id) {
                 foreach ($this->category->categories as $this->category_child) {
                     foreach ($this->category_child->products as $this->product) {
@@ -34,10 +41,10 @@ class CategoryController extends Controller
                     array_push($this->arr, [$this->product, $this->image]);
                 }
             }
-        } catch(Exception $e) {
-            return back()->withErrors($e->getMessage());
+
+            return view('products.product', ['products' => $this->arr]);
         }
 
-        return view('products.product', ['products' => $this->arr]);
+        return back();
     }
 }
