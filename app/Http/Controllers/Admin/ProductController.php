@@ -3,10 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\UpdateProductPut;
+<<<<<<< HEAD
 use App\Repositories\Category\CategoryRepositoryInterface;
 use App\Repositories\Image\ImageRepositoryInterface;
 use App\Repositories\Product\ProductRepositoryInterface;
 use App\Repositories\Size\SizeRepositoryInterface;
+=======
+use App\Repositories\Category\CategoryRepository;
+use App\Repositories\Product\ProductRepository;
+use App\Repositories\Size\SizeRepository;
+>>>>>>> parent of 764837b... Revert "Admin manager product."
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductPost;
@@ -26,21 +32,33 @@ class ProductController extends Controller
     private $imageRepository;
 
     public function __construct(
+<<<<<<< HEAD
         ProductRepositoryInterface $productRepository,
         CategoryRepositoryInterface $categoryRepository,
         SizeRepositoryInterface $sizeRepository,
         ImageRepositoryInterface $imageRepository
+=======
+        ProductRepository $productRepository,
+        CategoryRepository $categoryRepository,
+        SizeRepository $sizeRepository
+>>>>>>> parent of 764837b... Revert "Admin manager product."
     ){
         $this->productRepository = $productRepository;
         $this->categoryRepository = $categoryRepository;
         $this->sizeRepository = $sizeRepository;
+<<<<<<< HEAD
         $this->imageRepository = $imageRepository;
+=======
+>>>>>>> parent of 764837b... Revert "Admin manager product."
     }
 
     public function index()
     {
         $products = $this->productRepository->getWith(['images', 'sizes']);
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of 764837b... Revert "Admin manager product."
         $arr = [];
 
         if ($products) {
@@ -63,8 +81,14 @@ class ProductController extends Controller
 
     public function create()
     {
+<<<<<<< HEAD
         $categories = $this->categoryRepository->getChildCategory();
         $sizes = $this->sizeRepository->getAll();
+=======
+        $categories = Category::where('parent_id', '<>', null)->get();
+
+        $sizes = Size::all();
+>>>>>>> parent of 764837b... Revert "Admin manager product."
 
         return view('admin.products.create', ['categories' => $categories, 'sizes' => $sizes]);
     }
@@ -96,9 +120,15 @@ class ProductController extends Controller
             $destination_path = storage_path(config('admin.upload_image'));
             $image->move($destination_path, $image_name);
 
+<<<<<<< HEAD
             $product = $this->productRepository->create($data_save);
             $product_id = $product->id;
             $product = $this->productRepository->find($product_id);
+=======
+            $product = Product::create($data_save);
+            $product_id = $product->id;
+            $product = Product::find($product_id);
+>>>>>>> parent of 764837b... Revert "Admin manager product."
             $product->sizes()->sync($data['product_size']);
 
             $image = new Image();
@@ -120,7 +150,17 @@ class ProductController extends Controller
         ]);
         $product_id = $data['product_id'];
 
+<<<<<<< HEAD
         $flag = $this->productRepository->delete($product_id);
+=======
+        try {
+            $product = Product::findOrFail($product_id);
+            $product->delete();
+            $flag = true;
+        } catch (\Exception $e) {
+            $flag = false;
+        }
+>>>>>>> parent of 764837b... Revert "Admin manager product."
 
         $result = [
             'flag' => $flag,
@@ -131,12 +171,21 @@ class ProductController extends Controller
 
     public function edit($id)
     {
+<<<<<<< HEAD
         $product = $this->productRepository->getWith(['sizes', 'images'])->find($id);
         if ($product) {
             $image = $product->images->last()->image;
             $sizes = $product->sizes;
             $flag = true;
         } else {
+=======
+        try {
+            $product = Product::with(['sizes', 'images'])->findOrFail($id);
+            $image = $product->images->first()->image;
+            $sizes = $product->sizes;
+            $flag = true;
+        } catch (\Exception $e) {
+>>>>>>> parent of 764837b... Revert "Admin manager product."
             $flag = false;
         }
 
@@ -176,6 +225,7 @@ class ProductController extends Controller
 
         DB::beginTransaction();
         try {
+<<<<<<< HEAD
             if ($request->hasFile('product_image')) {
                 $image_type = $data_receive['product_image']->getClientOriginalExtension();
                 if (in_array($image_type, config('admin.extension_image'))) {
@@ -186,6 +236,19 @@ class ProductController extends Controller
                         $product->sizes()->detach();
                         $product->sizes()->sync(json_decode($data_receive['product_size'], true));
                     }
+=======
+            $product = Product::findOrfail($id);
+            $product->update($data_save);
+
+            $product_id = $product->id;
+            $product = Product::find($product_id);
+            $product->sizes()->detach();
+            $product->sizes()->sync(json_decode($data_receive['product_size'], true));
+
+            if ($request->hasFile('product_image')) {
+                $image_type = $data_receive['product_image']->getClientOriginalExtension();
+                if (in_array($image_type, config('admin.extension_image'))) {
+>>>>>>> parent of 764837b... Revert "Admin manager product."
                     $image = $data_receive['product_image'];
                     $image_name = time() . $image->getClientOriginalName();
                     $destination_path = storage_path(config('admin.upload_image'));
@@ -194,11 +257,16 @@ class ProductController extends Controller
                         'product_id' => $product_id,
                         'image' => $image_name,
                     ];
+<<<<<<< HEAD
                     $this->imageRepository->create($data);
+=======
+                    Image::create($data);
+>>>>>>> parent of 764837b... Revert "Admin manager product."
                 } else {
                     return response()->json($data_response);
                 }
             }
+<<<<<<< HEAD
             $product = $this->productRepository->update($id, $data_save);
             if ($product) {
                 $product_id = $product->id;
@@ -206,6 +274,8 @@ class ProductController extends Controller
                 $product->sizes()->detach();
                 $product->sizes()->sync(json_decode($data_receive['product_size'], true));
             }
+=======
+>>>>>>> parent of 764837b... Revert "Admin manager product."
             DB::commit();
             $data_response = [
                 'product_info' => $product,

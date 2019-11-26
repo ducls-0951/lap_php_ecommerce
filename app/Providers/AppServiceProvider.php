@@ -4,10 +4,8 @@ namespace App\Providers;
 
 use App\Repositories\Category\CategoryRepository;
 use App\Repositories\Category\CategoryRepositoryInterface;
-
 use App\Repositories\Image\ImageRepository;
 use App\Repositories\Image\ImageRepositoryInterface;
-
 use App\Repositories\Order\OrderRepository;
 use App\Repositories\Order\OrderRepositoryInterface;
 use App\Repositories\OrderDetail\OrderDetailRepository;
