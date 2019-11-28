@@ -25,7 +25,7 @@ class CategoryController extends Controller
     public function show($id)
     {
         $this->arr = [];
-        $this->category = $this->categoryRepository->getWith('categories.products')->find($id);
+        $this->category = $this->categoryRepository->getProduct($id, ['categories', 'products']);
 
         if ($this->category) {
             if (!$this->category->parent_id) {
