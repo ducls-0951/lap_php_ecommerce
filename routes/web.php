@@ -38,3 +38,8 @@ Route::prefix('carts')->group(function () {
 Route::prefix('orders')->group(function () {
     Route::post('/checkout', 'OrderController@store')->name('orders.store')->middleware('auth');
 });
+
+Route::prefix('users')->group(function () {
+    Route::get('/{user}', 'UserController@show')->name('users.show')->middleware('auth');
+    Route::put('/{user}', 'UserController@update')->name('users.update');
+});

@@ -16,9 +16,11 @@ mix.js([
     'resources/js/logout.js',
     'resources/js/button-add.js',
     'resources/js/add-to-cart.js',
+    'resources/js/user.js',
     ], 'public/js')
     .styles([
     'resources/css/slide.css',
     'resources/css/cart.css',
-    'resources/css/form.css'
+    'resources/css/form.css',
+    'resources/css/user.css',
     ], 'public/css/slide.css');
