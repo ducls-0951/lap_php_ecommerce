@@ -80,7 +80,7 @@
                         </li>
 
                         <li>
-                            <a href="#">{{ __('header.suggest') }}</a>
+                            <a href="{{ route('suggests.index') }}">{{ __('header.suggest') }}</a>
                         </li>
                     </ul>
                 </nav>

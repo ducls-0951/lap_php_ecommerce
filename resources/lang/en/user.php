@@ -21,4 +21,9 @@ return [
     'cancel' => 'Cancel',
     'success' => 'Success',
     'detail' => 'Detail',
+    'product_name' => 'Product Name',
+    'product_price' => 'Price',
+    'product_image' => 'Image',
+    'product_description' => 'Description',
+    'submit' => 'Submit',
 ];

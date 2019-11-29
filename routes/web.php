@@ -51,3 +51,8 @@ Route::prefix('users')->group(function () {
     Route::put('/order/{order}', 'UserController@cancelOrder')->name('users.cancel_order');
     Route::get('/order/order_detail/{order}', 'UserController@orderDetail')->name('users.order_detail');
 });
+
+Route::group(['prefix' => 'suggests', 'middleware' => 'auth'], function () {
+    Route::get('/index', 'SuggestController@index')->name('suggests.index');
+    Route::post('/store', 'SuggestController@store')->name('suggests.store');
+});

@@ -4,12 +4,16 @@ namespace App\Providers;
 
 use App\Repositories\Category\CategoryRepository;
 use App\Repositories\Category\CategoryRepositoryInterface;
+use App\Repositories\Image\ImageRepository;
+use App\Repositories\Image\ImageRepositoryInterface;
 use App\Repositories\Order\OrderRepository;
 use App\Repositories\Order\OrderRepositoryInterface;
 use App\Repositories\OrderDetail\OrderDetailRepository;
 use App\Repositories\OrderDetail\OrderDetailRepositoryInterface;
 use App\Repositories\Product\ProductRepository;
 use App\Repositories\Product\ProductRepositoryInterface;
+use App\Repositories\Suggest\SuggestRepository;
+use App\Repositories\Suggest\SuggestRepositoryInterface;
 use App\Repositories\User\UserRepository;
 use App\Repositories\User\UserRepositoryInterface;
 use Illuminate\Contracts\Encryption\DecryptException;
@@ -56,6 +60,16 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(
             UserRepositoryInterface::class,
             UserRepository::class
+        );
+
+        $this->app->singleton(
+            ImageRepositoryInterface::class,
+            ImageRepository::class
+        );
+
+        $this->app->singleton(
+            SuggestRepositoryInterface::class,
+            SuggestRepository::class
         );
     }
 

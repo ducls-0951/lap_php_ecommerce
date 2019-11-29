@@ -12,7 +12,6 @@ return [
     'checkOut' => 'Check Out',
     'shop' => 'Shop',
     'cart' => 'Cart',
-    'suggest' => 'Suggest',
     'img' => 'IMG',
     'icon' => 'ICON',
 ];
