@@ -18,9 +18,13 @@ mix.js([
     'resources/js/add-to-cart.js',
     'resources/js/user.js',
     ], 'public/js')
+    .js([
+    'resources/js/admin.js',
+    ], 'public/js')
     .styles([
     'resources/css/slide.css',
     'resources/css/cart.css',
     'resources/css/form.css',
     'resources/css/user.css',
+    'resources/css/admin.css',
     ], 'public/css/slide.css');
