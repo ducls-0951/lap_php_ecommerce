@@ -2,11 +2,11 @@
 @section('content')
     <div class="container mb-2 text-success font-weight-bold">
         <div class="row">
-            <div class="col-sm-2">
-                <h6><a href="#" class="text-decoration-none"></a>{{ __('user.account') }}</h6>
-                <h6><a href="#" class="text-decoration-none"></a>{{ __('user.order') }}</h6>
+            <div class="col-sm-1 ml-auto">
+                <a href="{{ route('users.show', ['user' => auth()->id()]) }}" class="text-decoration-none">{{ __('user.account') }}</a>
+                <a href="{{ route('users.showOrder', ['user' => auth()->id()]) }}" class="text-decoration-none">{{ __('user.order') }}</a>
             </div>
-            <div class="col-sm-8 offset-2">
+            <div class="col-sm-8 offset-4 ml-auto">
                 <form>
                     @csrf
                     <div class="form-group">

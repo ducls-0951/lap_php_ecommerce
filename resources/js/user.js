@@ -54,8 +54,32 @@ $(document).ready(function () {
                     },
                     icon: 'error'
                 });
-            }
-        })
+            },
+        });
+    });
 
-    })
+    $('.btn-cancel-order').click(function (event) {
+        event.preventDefault();
+
+        let order_id = $(this).attr('data-id');
+        let url = window.location.origin + `/users/order/` + order_id;
+
+        $.ajax({
+            url: url,
+            method: 'PUT',
+            success: function (dataResponse) {
+                if (dataResponse.flag) {
+                    $('#order-status-' + order_id).removeAttr('class');
+                    $('#order-status-' + order_id).addClass('badge badge-danger');
+                    $('#order-status-' + order_id).html('Cancel');
+                    swal('Cancel order', 'successfully', 'success');
+                } else {
+                    swal('Cancel order', 'fail', 'error');
+                }
+            },
+            error: function (dataResponse) {
+                swal('Cancel order', 'fail', 'error');
+            },
+        });
+    });
 });

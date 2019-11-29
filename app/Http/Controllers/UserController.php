@@ -9,15 +9,18 @@ use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
+use App\Repositories\Order\OrderRepositoryInterface;
 
 class UserController extends Controller
 {
     private $userRepository;
     private $dataUpdate = [];
+    private $orderRepository;
 
-    public function __construct(UserRepositoryInterface $userRepository)
+    public function __construct(UserRepositoryInterface $userRepository, OrderRepositoryInterface $orderRepository)
     {
         $this->userRepository = $userRepository;
+        $this->orderRepository = $orderRepository;
     }
 
     public function show($id)
@@ -27,6 +30,7 @@ class UserController extends Controller
         }
 
         $user = $this->userRepository->find($id);
+
         if ($user) {
             return view('user.profile', ['user' => $user]);
         }
@@ -89,5 +93,59 @@ class UserController extends Controller
         }
 
         return response()->json(['flag' => false]);
+    }
+
+    public function order($id)
+    {
+        if ($id != auth()->id()) {
+            return back();
+        }
+
+        $user = $this->userRepository->getWithFind($id, 'orders');
+
+        return view('user.order', ['orders' => $user->orders]);
+    }
+
+    public function cancelOrder($id)
+    {
+        $order = $this->orderRepository->update($id, ['status' => config('order.cancel')]);
+
+        if ($order) {
+            $dataResponse = [
+                'flag' => true,
+            ];
+
+            return response()->json($dataResponse);
+        }
+
+        $dataResponse = [
+            'flag' => false,
+        ];
+
+        return response()->json($dataResponse);
+    }
+
+    public function orderDetail($id)
+    {
+        $order = $this->orderRepository->getWithFind($id, 'orderDetails.product.images');
+        $productList = [];
+
+        if ($order) {
+            $orderDetails = $order->orderDetails;
+            foreach ($orderDetails as $orderDetail) {
+                $productName = $orderDetail->product->name;
+                $productImage = $orderDetail->product->images->last();
+
+                array_push($productList, [
+                    'productImage' => $productImage->image,
+                    'productName' => $productName,
+                    'quantity' => $orderDetail->quantity,
+                    'price' => $orderDetail->price,
+                    'totalPrice' => $orderDetail->quantity * $orderDetail->price,
+                ]);
+            }
+        }
+
+        return view('user.order_detail', ['productList' => $productList]);
     }
 }
