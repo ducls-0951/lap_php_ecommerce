@@ -22,9 +22,7 @@
                                     <tr class="table-row" id="{{ $cart['product_id'] }}">
                                         <td class="column-1">
                                             <div class="cart-img-product b-rad-4 o-f-hidden">
-                                                <img
-                                                    src="{{ asset('storage/product_images/' . $cart['product_image']) }}"
-                                                    alt="{{ __('cart.img_product') }}">
+                                                <img src="{{ asset('storage/product_images/' . $cart['product_image']) }}" alt="{{ __('cart.img_product') }}">
                                             </div>
                                         </td>
                                         <input type="text" name="product_id_{{ $cart['product_id'] }}"

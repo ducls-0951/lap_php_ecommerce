@@ -70,4 +70,13 @@ abstract class BaseRepositories implements RepositoryInterface
 
         return $result;
     }
+
+    public function getWithFind($id, $data = [])
+    {
+        try {
+            return $this->model->with($data)->findOrFail($id);
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
 }

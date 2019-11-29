@@ -45,4 +45,7 @@ Route::prefix('orders')->group(function () {
 Route::prefix('users')->group(function () {
     Route::get('/{user}', 'UserController@show')->name('users.show')->middleware('auth');
     Route::put('/{user}', 'UserController@update')->name('users.update');
+    Route::get('/order/{user}', 'UserController@order')->name('users.showOrder');
+    Route::put('/order/{order}', 'UserController@cancelOrder')->name('users.cancel_order');
+    Route::get('/order/order_detail/{order}', 'UserController@orderDetail')->name('users.order_detail');
 });
