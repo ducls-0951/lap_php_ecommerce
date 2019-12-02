@@ -19,4 +19,9 @@ class CategoryRepository extends BaseRepositories implements CategoryRepositoryI
             return false;
         }
     }
+
+    public function getWhereNotNull()
+    {
+        return $this->model->where('parent_id', '<>', null)->get();
+    }
 }

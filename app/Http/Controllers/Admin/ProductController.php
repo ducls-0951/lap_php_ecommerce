@@ -3,22 +3,40 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\UpdateProductPut;
-use Illuminate\Support\Facades\Storage;
+use App\Repositories\Category\CategoryRepositoryInterface;
+use App\Repositories\Image\ImageRepositoryInterface;
+use App\Repositories\Product\ProductRepositoryInterface;
+use App\Repositories\Size\SizeRepositoryInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductPost;
 use Illuminate\Http\Request;
 use App\Models\Product;
-use App\Models\Category;
-use App\Models\Size;
 use App\Models\Image;
 use Mockery\Exception;
 use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
+    private $productRepository;
+    private $imageRepository;
+    private $categoryRepository;
+    private $sizeRepository;
+
+    public function __construct(
+        ProductRepositoryInterface $productRepository,
+        ImageRepositoryInterface $imageRepository,
+        CategoryRepositoryInterface $categoryRepository,
+        SizeRepositoryInterface $sizeRepository
+    )
+    {
+        $this->productRepository = $productRepository;
+        $this->imageRepository = $imageRepository;
+        $this->categoryRepository = $categoryRepository;
+        $this->sizeRepository = $sizeRepository;
+    }
     public function index()
     {
-        $products = Product::with('images', 'sizes')->get();
+        $products = $this->productRepository->getWith(['images', 'sizes']);
         $arr = [];
         foreach ($products as $product) {
             $product_image = $product->images->last();
@@ -36,9 +54,9 @@ class ProductController extends Controller
 
     public function create()
     {
-        $categories = Category::where('parent_id', '<>', null)->get();
+        $categories = $this->categoryRepository->getWhereNotNull();
 
-        $sizes = Size::all();
+        $sizes = $this->sizeRepository->getAll();
 
         return view('admin.products.create', ['categories' => $categories, 'sizes' => $sizes]);
     }
@@ -66,13 +84,11 @@ class ProductController extends Controller
 
         try {
             $image = $request->file('product_image');
-            $image_name = time() . $image->getClientOriginalName();
-            $destination_path = storage_path(config('admin.upload_image'));
-            $image->move($destination_path, $image_name);
+            $image_name = $this->imageRepository->uploadImage($image, config('image_path'));
 
-            $product = Product::create($data_save);
+            $product = $this->productRepository->create($data_save);
             $product_id = $product->id;
-            $product = Product::find($product_id);
+            $product = $this->productRepository->find($product_id);
             $product->sizes()->sync($data['product_size']);
 
             $image = new Image();
@@ -81,7 +97,7 @@ class ProductController extends Controller
             $image->save();
             $flag = true;
         } catch (Exception $e) {
-            return redirect()->back()->with('error', __('config.product_fail'));
+            return redirect()->back()->with('error', __('product.product_fail'));
         }
 
         return redirect()->back()->with('status', __('product.product_success'));
@@ -94,11 +110,11 @@ class ProductController extends Controller
         ]);
         $product_id = $data['product_id'];
 
-        try {
-            $product = Product::findOrFail($product_id);
-            $product->delete();
+        $product = $this->productRepository->delete($product_id);
+
+        if ($product) {
             $flag = true;
-        } catch (\Exception $e) {
+        } else {
             $flag = false;
         }
 
@@ -111,12 +127,13 @@ class ProductController extends Controller
 
     public function edit($id)
     {
-        try {
-            $product = Product::with(['sizes', 'images'])->findOrFail($id);
-            $image = $product->images->first()->image;
+        $product = $this->productRepository->getWithFind($id, ['sizes', 'images']);
+
+        if ($product) {
+            $image = $product->images->last()->image;
             $sizes = $product->sizes;
             $flag = true;
-        } catch (\Exception $e) {
+        } else {
             $flag = false;
         }
 
@@ -156,29 +173,19 @@ class ProductController extends Controller
 
         DB::beginTransaction();
         try {
-            $product = Product::findOrfail($id);
-            $product->update($data_save);
-
+            $product = $this->productRepository->update($id, $data_save);
             $product_id = $product->id;
-            $product = Product::find($product_id);
+            $product = $this->productRepository->find($id);
             $product->sizes()->detach();
             $product->sizes()->sync(json_decode($data_receive['product_size'], true));
 
             if ($data_receive['product_image'] != 'undefined') {
-                $image_type = $data_receive['product_image']->getClientOriginalExtension();
-                if ($image_type == 'jpeg' || $image_type == 'png' || $image_type == 'jpg') {
-                    $image = $data_receive['product_image'];
-                    $image_name = time() . $image->getClientOriginalName();
-                    $destination_path = storage_path(config('admin.upload_image'));
-                    $image->move($destination_path, $image_name);
-                    $data = [
-                        'product_id' => $product_id,
-                        'image' => $image_name,
-                    ];
-                    Image::create($data);
-                } else {
-                    return response()->json($data_response);
-                }
+                $image_name = $this->imageRepository->uploadImage($data_receive['product_image'], config('admin.upload_image'));
+                $data = [
+                    'product_id' => $product_id,
+                    'image' => $image_name,
+                ];
+                $this->imageRepository->create($data);
             }
             DB::commit();
             $data_response = [

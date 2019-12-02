@@ -79,4 +79,9 @@ abstract class BaseRepositories implements RepositoryInterface
             return false;
         }
     }
+
+    public function getAll()
+    {
+        return $this->model->all();
+    }
 }
