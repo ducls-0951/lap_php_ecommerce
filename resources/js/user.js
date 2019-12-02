@@ -82,4 +82,86 @@ $(document).ready(function () {
             },
         });
     });
+
+    $('.btn-cancel-suggest').click(function () {
+        let suggestId = $(this).attr('data-id');
+        let url = window.location.origin + '/suggests/' + suggestId;
+         $.ajax({
+             url: url,
+             method: 'PUT',
+             data: suggestId,
+             success: function (dataResponse) {
+                 if (dataResponse.flag) {
+                     $('#suggest-status-' + suggestId).removeAttr('class');
+                     $('#suggest-status-' + suggestId).attr('class', 'badge badge-danger');
+                     $('#suggest-status-' + suggestId).html('Cancel');
+                     $('button[data-id=' + suggestId + ']').remove();
+                     swal('Cancel', 'suggest successfully!', 'success');
+                 } else {
+                     swal('Cancel', 'suggest fail!', 'error');
+                 }
+             },
+             error: function(dataResponse) {
+                 swal('Cancel', 'suggest fail!', 'error');
+             }
+         })
+    });
+
+    $('.btn-edit-suggest').click(function () {
+        let suggestId = $(this).attr('data-id');
+        let url = window.location.origin + '/suggests/edit/' + suggestId;
+
+        $.ajax({
+            url: url,
+            method: 'GET',
+            success: function (dataResponse) {
+                if (dataResponse.flag) {
+                    $('#product-name').val(dataResponse.suggest.product_name);
+                    $('#product-price').val(dataResponse.suggest.price);
+                    $('#product-description').val(dataResponse.suggest.description);
+                    $('.btn-submit-edit-suggest').attr('value', suggestId);
+                    $('#modal-form-edit-suggest').modal('show');
+                } else {
+                    swal('Ops...', 'something wrong', 'error');
+                }
+            },
+            error: function () {
+                swal('Ops...', 'something wrong', 'error');
+            },
+        });
+    });
+
+    $('.btn-submit-edit-suggest').click(function (event) {
+        event.preventDefault();
+
+        let suggestId = $(this).val();
+        let url = window.location.origin + '/suggests/update/' + suggestId;
+        let url_image = window.location.origin + '/storage/product_images/';
+        let formData = new FormData();
+        formData.append('product_name', $('#product-name').val());
+        formData.append('product_price', $('#product-price').val());
+        formData.append('product_description', $('#product-description').val());
+        formData.append('product_image', $('input[type=file]')[0].files[0]);
+        formData.append('_method', 'PUT');
+        $.ajax({
+            url: url,
+            method: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (dataResponse) {
+                if (dataResponse.flag) {
+                    $('#suggest-product-name-' + suggestId).html(dataResponse.suggest.product_name);
+                    $('#suggest-price-' + suggestId).html(dataResponse.suggest.price);
+                    $('#suggest-description-' + suggestId).html(dataResponse.suggest.description);
+                    $('#suggest-image-' + suggestId).attr('src', url_image + dataResponse.suggest.image);
+                    $('#modal-form-edit-suggest').modal('hide');
+                    swal('Edit', 'suggest successfully!', 'success');
+                }
+            },
+            error: function () {
+                swal('Ops...', 'something wrong!', 'error');
+            }
+        });
+    });
 });

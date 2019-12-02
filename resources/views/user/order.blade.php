@@ -6,6 +6,7 @@
                 <div class="col-sm-1 ml-auto">
                     <a href="{{ route('users.show', ['user' => auth()->id()]) }}" class="text-decoration-none">{{ __('user.account') }}</a>
                     <a href="{{ route('users.showOrder', ['user' => auth()->id()]) }}" class="text-decoration-none">{{ __('user.order') }}</a>
+                    <a href="{{ route('suggests.listSuggest') }}" class="text-decoration-none">{{ __('user.suggest') }}</a>
                 </div>
                 <div class="col-sm-11 ml-auto">
                     <div class="container-table-cart pos-relative">

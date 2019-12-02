@@ -54,5 +54,9 @@ Route::prefix('users')->group(function () {
 
 Route::group(['prefix' => 'suggests', 'middleware' => 'auth'], function () {
     Route::get('/index', 'SuggestController@index')->name('suggests.index');
+    Route::get('/list', 'SuggestController@listSuggest')->name('suggests.listSuggest');
     Route::post('/store', 'SuggestController@store')->name('suggests.store');
+    Route::put('/{suggest}', 'SuggestController@cancelSuggest')->name('suggests.cancelSuggest');
+    Route::get('/edit/{suggest}', 'SuggestController@edit')->name('suggest.edit');
+    Route::put('/update/{suggest}', 'SuggestController@updateSuggest')->name('suggest.updateSuggest');
 });

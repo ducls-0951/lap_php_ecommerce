@@ -25,6 +25,7 @@ class SuggestController extends Controller
         return view('user.suggest');
     }
 
+
     public function store(StoreSuggestPost $request)
     {
         $dataReceive = $request->only([
@@ -45,8 +46,79 @@ class SuggestController extends Controller
             'user_id' => auth()->id(),
         ];
 
-        $suggest = $this->suggestRepository->create($dataSave);
+        $this->suggestRepository->create($dataSave);
 
-        return view('user.')
+        return $this->listSuggest();
+    }
+
+    public function listSuggest()
+    {
+        $suggests = $this->suggestRepository->getAll();
+
+        return view('user.list_suggest', ['suggests' => $suggests]);
+    }
+
+    public function cancelSuggest($id)
+    {
+        $suggest = $this->suggestRepository->update($id, ['status' => config('suggest.cancel')]);
+
+        if ($suggest) {
+            return response()->json(['flag' => true]);
+        }
+
+        return response()->json(['flag' => false]);
+    }
+
+    public function edit($id)
+    {
+        $suggest = $this->suggestRepository->find($id);
+
+        if ($suggest) {
+            return response()->json([
+                'suggest' => $suggest,
+                'flag' => true,
+            ]);
+        }
+
+        return response()->json(['flag' => false]);
+    }
+
+    public function updateSuggest($id, Request $request)
+    {
+        $dataReceive = $request->only([
+            'product_name',
+            'product_price',
+            'product_description',
+            'product_image',
+        ]);
+
+        if (isset($dataReceive['product_image'])) {
+            $imageName = $this->imageRepository->uploadImage($dataReceive['product_image'], config('image.image_path'));
+
+            $dataSave = [
+                'product_name' => $dataReceive['product_name'],
+                'description' => $dataReceive['product_description'],
+                'price' => $dataReceive['product_price'],
+                'image' => $imageName,
+            ];
+        } else {
+            $dataSave = [
+                'product_name' => $dataReceive['product_name'],
+                'description' => $dataReceive['product_description'],
+                'price' => $dataReceive['product_price'],
+            ];
+        }
+
+        $suggest = $this->suggestRepository->update($id, $dataSave);
+        if ($suggest) {
+            return response()->json([
+                'suggest' => $suggest,
+                'flag' => true,
+            ]);
+        }
+
+        return response()->json([
+            'flag' => false,
+        ]);
     }
 }
