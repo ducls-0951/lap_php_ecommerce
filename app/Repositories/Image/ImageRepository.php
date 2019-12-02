@@ -2,14 +2,14 @@
 
 namespace App\Repositories\Image;
 
-use App\Models\Suggest;
+use App\Models\Image;
 use App\Repositories\BaseRepositories;
 
 class ImageRepository extends BaseRepositories implements  ImageRepositoryInterface
 {
     public function getModel()
     {
-        return Suggest::class;
+        return Image::class;
     }
 
     public function uploadImage($image, $path)

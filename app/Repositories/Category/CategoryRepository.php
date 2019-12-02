@@ -2,13 +2,19 @@
 
 namespace App\Repositories\Category;
 
+use App\Models\Category;
 use App\Repositories\BaseRepositories;
 
 class CategoryRepository extends BaseRepositories implements CategoryRepositoryInterface
 {
     public function getModel()
     {
-        return \App\Models\Category::class;
+        return Category::class;
+    }
+
+    public function whereNotNull($data)
+    {
+        return $this->model->where($data,'<>', null)->get();
     }
 
     public function getProduct($id, $data = [])

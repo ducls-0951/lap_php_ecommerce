@@ -65,7 +65,7 @@ $(document).ready(function () {
                 $('#product-price').val(data.product.price);
                 $('#product-price-sale').val(data.product.price_sale);
                 $('#product-category').val(data.product.category_id);
-                $.each(data.sizes, function(key, value) {
+                $.each(data.sizes, function (key, value) {
                     $('#product' + value.id).prop('checked', true);
                 });
                 $('#product-description').val(data.product.description);

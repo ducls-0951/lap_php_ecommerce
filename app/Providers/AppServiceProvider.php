@@ -18,6 +18,8 @@ use App\Repositories\Suggest\SuggestRepository;
 use App\Repositories\Suggest\SuggestRepositoryInterface;
 use App\Repositories\User\UserRepository;
 use App\Repositories\User\UserRepositoryInterface;
+use App\Repositories\Size\SizeRepository;
+use App\Repositories\Size\SizeRepositoryInterface;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Crypt;
@@ -67,6 +69,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(
             ImageRepositoryInterface::class,
             ImageRepository::class
+        );
+
+        $this->app->singleton(
+            SizeRepositoryInterface::class,
+            SizeRepository::class
         );
 
         $this->app->singleton(

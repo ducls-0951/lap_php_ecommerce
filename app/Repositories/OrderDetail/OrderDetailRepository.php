@@ -2,12 +2,13 @@
 
 namespace App\Repositories\OrderDetail;
 
+use App\Models\Order_Detail;
 use App\Repositories\BaseRepositories;
 
 class OrderDetailRepository extends BaseRepositories implements OrderDetailRepositoryInterface
 {
     public function getModel()
     {
-        return \App\Models\Order_Detail::class;
+        return Order_Detail::class;
     }
 }

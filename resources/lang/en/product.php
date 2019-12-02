@@ -24,4 +24,6 @@ return [
     'short_price_high' => 'Price: high to low',
     '$' => '$',
     'search' => 'Search Product...',
+    'product_success' => 'Create product successfully!',
+    'product_fail' => 'Create product fail!',
 ];

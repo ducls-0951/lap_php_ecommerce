@@ -23,7 +23,7 @@ return [
     'tables' => 'Tables',
     'show' => 'Show',
     'create' => 'Create',
-    'full_name' => 'Fullname',
+    'full_name' => 'Full name',
     'email' => 'Email',
     'avatar' => 'Avatar',
     'permission' => 'Permission',

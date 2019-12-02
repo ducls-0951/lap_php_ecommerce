@@ -18,17 +18,16 @@ use Illuminate\Support\Facades\DB;
 class ProductController extends Controller
 {
     private $productRepository;
-    private $imageRepository;
     private $categoryRepository;
     private $sizeRepository;
+    private $imageRepository;
 
     public function __construct(
         ProductRepositoryInterface $productRepository,
-        ImageRepositoryInterface $imageRepository,
         CategoryRepositoryInterface $categoryRepository,
+        ImageRepositoryInterface $imageRepository,
         SizeRepositoryInterface $sizeRepository
-    )
-    {
+    ){
         $this->productRepository = $productRepository;
         $this->imageRepository = $imageRepository;
         $this->categoryRepository = $categoryRepository;
@@ -38,6 +37,7 @@ class ProductController extends Controller
     {
         $products = $this->productRepository->getWith(['images', 'sizes']);
         $arr = [];
+
         foreach ($products as $product) {
             $product_image = $product->images->last();
             $product_sizes = $product->sizes;
@@ -54,9 +54,9 @@ class ProductController extends Controller
 
     public function create()
     {
-        $categories = $this->categoryRepository->getWhereNotNull();
+        $categories = $this->categoryRepository->whereNotNull('parent_id');
 
-        $sizes = $this->sizeRepository->getAll();
+        $sizes = $this->sizeRepository->all();
 
         return view('admin.products.create', ['categories' => $categories, 'sizes' => $sizes]);
     }
@@ -84,7 +84,7 @@ class ProductController extends Controller
 
         try {
             $image = $request->file('product_image');
-            $image_name = $this->imageRepository->uploadImage($image, config('image_path'));
+            $image_name = $this->imageRepository->uploadImage($image, config('admin.upload_image'));
 
             $product = $this->productRepository->create($data_save);
             $product_id = $product->id;
@@ -95,7 +95,6 @@ class ProductController extends Controller
             $image->image = $image_name;
             $image->product_id = $product_id;
             $image->save();
-            $flag = true;
         } catch (Exception $e) {
             return redirect()->back()->with('error', __('product.product_fail'));
         }
@@ -173,19 +172,30 @@ class ProductController extends Controller
 
         DB::beginTransaction();
         try {
-            $product = $this->productRepository->update($id, $data_save);
-            $product_id = $product->id;
-            $product = $this->productRepository->find($id);
-            $product->sizes()->detach();
-            $product->sizes()->sync(json_decode($data_receive['product_size'], true));
-
-            if ($data_receive['product_image'] != 'undefined') {
+            if ($request->hasFile('product_image')) {
                 $image_name = $this->imageRepository->uploadImage($data_receive['product_image'], config('admin.upload_image'));
-                $data = [
-                    'product_id' => $product_id,
-                    'image' => $image_name,
-                ];
-                $this->imageRepository->create($data);
+
+                if ($image_name) {
+                    $product = $this->productRepository->update($id, $data_save);
+                    $product_id = $product->id;
+                    $product = $this->productRepository->find($product_id);
+                    $product->sizes()->detach();
+                    $product->sizes()->sync(json_decode($data_receive['product_size']), true);
+                    $data = [
+                        'product_id' => $product->id,
+                        'image' => $image_name,
+                    ];
+
+                    $this->imageRepository->create($data);
+                } else {
+                    return response()->json($data_response);
+                }
+            } else {
+                $product = $this->productRepository->update($id, $data_save);
+                $product_id = $product->id;
+                $product = $this->productRepository->find($product_id);
+                $product->sizes()->detach();
+                $product->sizes()->sync(json_decode($data_receive['product_size']), true);
             }
             DB::commit();
             $data_response = [

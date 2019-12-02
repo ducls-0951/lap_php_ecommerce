@@ -21,6 +21,9 @@ mix.js([
     .js([
     'resources/js/admin.js',
     ], 'public/js')
+    .js([
+        'resources/js/admin.js',
+    ], 'public/js')
     .styles([
     'resources/css/slide.css',
     'resources/css/cart.css',

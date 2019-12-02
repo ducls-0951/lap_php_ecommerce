@@ -7,7 +7,7 @@ return [
     '10' => 10,
     'info' => 0,
     'image' => 1,
-    'product_size' => 2,
+    'size' => 2,
     'quantity_min' => 1,
     'price_very_low' => 1,
     'price_low' => 2,

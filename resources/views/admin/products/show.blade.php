@@ -25,32 +25,37 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($products as $product)
-                                    <tr id="{{ $product[config('product.info')]->id }}">
-                                        <td>
-                                            <div class="checkbox">
-                                                <input id="selectable2" type="checkbox">
-                                                <label for="selectable2"></label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <span class="title">{{ $product[config('product.info')]->name }}</span>
-                                        </td>
-                                        <td><img class="admin-product-image" src="{{ asset('storage/product_images/' . $product[config('product.image')]->image)}}" alt=""></td>
-                                        <td>{{ $product[config('product.info')]->price }}</td>
-                                        <td>{{ $product[config('product.info')]->price_sale }}</td>
-                                        <td>{{ $product[config('product.product_size')] }}</td>
-                                        <td>{{ $product[config('product.info')]->quantity }}</td>
-                                        <td class="font-size-18">
-                                            <button type="button" class="btn btn-info btn-edit-product-admin">
-                                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-danger btn-del-product-admin" value="{{ $product[config('product.info')]->id }}">
-                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                    @foreach($products as $product)
+                                        <tr id="{{ $product[config('product.info')]->id }}">
+                                            <td>
+                                                <div class="checkbox">
+                                                    <input id="selectable2" type="checkbox">
+                                                    <label for="selectable2"></label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <span class="title">{{ $product[config('product.info')]->name }}</span>
+                                            </td>
+                                            <td><img class="admin-product-image"
+                                                     src="{{ asset('storage/product_images/' . $product[config('product.image')]->image)}}"
+                                                     alt=""></td>
+                                            <td>{{ $product[config('product.info')]->category->name }}</td>
+                                            <td>{{ $product[config('product.info')]->price }}</td>
+                                            <td>{{ $product[config('product.info')]->price_sale }}</td>
+                                            <td>{{ $product[config('product.size')] }}</td>
+                                            <td>{{ $product[config('product.info')]->quantity }}</td>
+                                            <td class="font-size-18">
+                                                <button type="button" class="btn btn-info btn-edit-product-admin"
+                                                        value="{{ $product[config('product.info')]->id }}">
+                                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-danger btn-del-product-admin"
+                                                        value="{{ $product[config('product.info')]->id }}">
+                                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

@@ -18,4 +18,4 @@ package.json
 /public/bower_components/*
 /public/css/
 /public/js/
-webpack.mix.js
+public/mix-manifest.json

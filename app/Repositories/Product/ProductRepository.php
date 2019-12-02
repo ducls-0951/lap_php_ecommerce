@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Product;
 
+use App\Models\Product;
 use App\Repositories\BaseRepositories;
 use Illuminate\Support\Facades\Cookie;
 
@@ -11,7 +12,7 @@ class ProductRepository extends BaseRepositories implements ProductRepositoryInt
 
     public function getModel()
     {
-        return \App\Models\Product::class;
+        return Product::class;
     }
 
     public function topRateProduct($data = [])

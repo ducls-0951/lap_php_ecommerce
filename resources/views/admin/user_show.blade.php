@@ -9,18 +9,18 @@
                             <table id="dt-opt" class="table table-hover table-xl">
                                 <thead>
                                     <tr>
-                                    <th>
-                                        <div class="checkbox p-0">
-                                            <input id="selectable1" type="checkbox" class="checkAll" name="checkAll">
-                                            <label for="selectable1"></label>
-                                        </div>
-                                    </th>
-                                    <th>{{ __('admin.full_name') }}</th>
-                                    <th>{{ __('admin.email') }}</th>
-                                    <th>{{ __('admin.avatar') }}</th>
-                                    <th>{{ __('admin.permission') }}</th>
-                                    <th>{{ __('admin.action') }}</th>
-                                </tr>
+                                        <th>
+                                            <div class="checkbox p-0">
+                                                <input id="selectable1" type="checkbox" class="checkAll" name="checkAll">
+                                                <label for="selectable1"></label>
+                                            </div>
+                                        </th>
+                                        <th>{{ __('admin.full_name') }}</th>
+                                        <th>{{ __('admin.email') }}</th>
+                                        <th>{{ __('admin.avatar') }}</th>
+                                        <th>{{ __('admin.permission') }}</th>
+                                        <th>{{ __('admin.action') }}</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
