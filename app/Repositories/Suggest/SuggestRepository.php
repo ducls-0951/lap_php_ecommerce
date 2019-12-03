@@ -11,4 +11,9 @@ class SuggestRepository extends BaseRepositories implements SuggestRepositoryInt
     {
         return Suggest::class;
     }
+
+    public function getAll()
+    {
+        return $this->model->all();
+    }
 }

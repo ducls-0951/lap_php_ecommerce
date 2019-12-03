@@ -26,4 +26,7 @@ return [
     'product_image' => 'Image',
     'product_description' => 'Description',
     'submit' => 'Submit',
+    'suggest' => 'Suggest',
+    'suggest_id' => 'Suggest ID',
+    'edit' => 'Edit',
 ];
