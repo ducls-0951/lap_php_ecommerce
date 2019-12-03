@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreOrderPost;
+use App\Mail\OrderMail;
 use App\Models\Order_Detail;
 use App\Repositories\Order\OrderRepository;
 use App\Repositories\Order\OrderRepositoryInterface;
@@ -10,6 +11,8 @@ use App\Repositories\OrderDetail\OrderDetailRepository;
 use App\Repositories\OrderDetail\OrderDetailRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Models\Order;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -18,6 +21,7 @@ class OrderController extends Controller
     private $cookie;
     private $orderRepository;
     private $orderDetailRepository;
+    private $order;
 
     public function __construct(OrderRepositoryInterface $orderRepository, OrderDetailRepositoryInterface $orderDetailRepository)
     {
@@ -29,6 +33,7 @@ class OrderController extends Controller
     {
         $carts = unserialize($request->cookie('cart'));
 
+        DB::beginTransaction();
         try {
             if ($carts) {
                 $user_id = auth()->id();
@@ -51,14 +56,14 @@ class OrderController extends Controller
                     'status' => config('order.processing'),
                 ];
 
-                $order = $this->orderRepository->create($data_save);
+                $this->order = $this->orderRepository->create($data_save);
 
                 foreach ($carts as $cart) {
                     $data_save = [
                         'quantity' => $cart['quantity'],
                         'price' => $cart['price'],
                         'product_id' => $cart['product_id'],
-                        'order_id' => $order->id,
+                        'order_id' => $this->order->id,
                     ];
 
                     $order_detail = $this->orderDetailRepository->create($data_save);
@@ -66,9 +71,15 @@ class OrderController extends Controller
                 }
             }
 
+            $user = auth()->user();
+            Mail::to($user)->send(new OrderMail($this->order));
+            DB::commit();
+
             return redirect()->back()->with('status', __('order.order_successfully'))->withCookie($this->cookie);
         } catch (\Exception $e) {
-            return redirect()->back()->with('msg', __('order.order_fail'))->withCookies($this->cookie);
+            DB::rollBack();
+
+            return redirect()->back()->with('msg', __('order.order_fail'));
         }
     }
 }
