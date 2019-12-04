@@ -10,4 +10,9 @@ class OrderRepository extends BaseRepositories implements OrderRepositoryInterfa
     {
         return \App\Models\Order::class;
     }
+
+    public function getOrderProcess()
+    {
+        return $this->model->where('status', config('order.processing'))->get();
+    }
 }
