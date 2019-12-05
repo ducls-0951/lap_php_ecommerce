@@ -29,8 +29,10 @@ Route::prefix('admin')->group(function() {
     Route::get('orders/index', 'Admin\OrderController@index')->name('admin.index_order');
     Route::put('orders/{order}', 'Admin\OrderController@update')->name('admin.update_order');
     Route::delete('orders/{order}', 'Admin\OrderController@destroy')->name('admin.cancel_order');
-    Route::get('index_user', 'AdminController@index_user')->name('admin.index_user');
-    Route::get('index_category', 'AdminController@index_category')->name('admin.index_category');
+    Route::get('index_user', 'Admin\AdminController@index_user')->name('admin.index_user');
+    Route::get('index_category', 'Admin\AdminController@index_category')->name('admin.index_category');
+    Route::get('/chart', 'Admin\AdminController@chart')->name('admin.chart');
+    Route::get('/countChart', 'Admin\AdminController@countOrder');
 });
 
 Route::prefix('carts')->group(function() {

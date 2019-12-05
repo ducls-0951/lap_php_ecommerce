@@ -5,6 +5,117 @@ $(document).ready(function () {
         }
     });
 
+    let urlDay = window.location.origin + '/admin/countChart';
+    let year = new Date().getFullYear();
+
+    $.ajax({
+        url: urlDay,
+        data: {'year' : year},
+        success: function (dataResponse) {
+            $('#' + year).prop('checked', true);
+            +function ($, window) {
+
+                let defaultDashboaard = {};
+
+                defaultDashboaard.init = function() {
+
+                    let overviewCtx = document.getElementById('customer-overview-chart').getContext('2d');
+                    let overviewChart = new Chart(overviewCtx, {
+                        type: 'line',
+                        data: {
+                            labels: dataResponse.month,
+                            datasets: [{
+                                label: 'Series A',
+                                backgroundColor: app.colors.transparent,
+                                borderColor: app.colors.success,
+                                data: dataResponse.totalOrder
+                            }],
+                        },
+                        options: {
+                            legend: {
+                                display: false
+                            },
+                            maintainAspectRatio: false,
+                            elements: {
+                                line: {
+                                    tension: 0.2,
+                                    borderWidth: 1.5
+                                }
+                            },
+                            scales: {
+                                xAxes: [{gridLines: { color: app.colors.transparent }}],
+                                yAxes: [{gridLines: { color: app.colors.borderColor }}]
+                            }
+                        }
+                    });
+                };
+
+                window.defaultDashboaard = defaultDashboaard;
+
+            }(jQuery, window);
+
+            +function($) {
+                defaultDashboaard.init();
+            }(jQuery);
+        }
+    });
+
+    $("input[name='chart']").change(function () {
+        let year = $(this).val();
+
+        $.ajax({
+            url: urlDay,
+            data: {'year' : year},
+            success: function (dataResponse) {
+                $('#' + year).prop('checked', true);
+                +function ($, window) {
+
+                    let defaultDashboaard = {};
+
+                    defaultDashboaard.init = function() {
+
+                        let overviewCtx = document.getElementById('customer-overview-chart').getContext('2d');
+                        let overviewChart = new Chart(overviewCtx, {
+                            type: 'line',
+                            data: {
+                                labels: dataResponse.month,
+                                datasets: [{
+                                    label: 'Series A',
+                                    backgroundColor: app.colors.transparent,
+                                    borderColor: app.colors.success,
+                                    data: dataResponse.totalOrder
+                                }],
+                            },
+                            options: {
+                                legend: {
+                                    display: false
+                                },
+                                maintainAspectRatio: false,
+                                elements: {
+                                    line: {
+                                        tension: 0.2,
+                                        borderWidth: 1.5
+                                    }
+                                },
+                                scales: {
+                                    xAxes: [{gridLines: { color: app.colors.transparent }}],
+                                    yAxes: [{gridLines: { color: app.colors.borderColor }}]
+                                }
+                            }
+                        });
+                    };
+
+                    window.defaultDashboaard = defaultDashboaard;
+
+                }(jQuery, window);
+
+                +function($) {
+                    defaultDashboaard.init();
+                }(jQuery);
+            }
+        });
+    });
+
     $('.btn-del-product-admin').click(function () {
         let product_id = $(this).val();
 
